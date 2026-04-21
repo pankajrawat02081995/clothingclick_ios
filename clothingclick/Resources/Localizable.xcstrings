@@ -1,0 +1,39 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Both" : {
+      "extractionState" : "manual"
+    },
+    "Bottoms" : {
+      "extractionState" : "manual"
+    },
+    "Footwear" : {
+      "extractionState" : "manual"
+    },
+    "Menswear" : {
+      "extractionState" : "manual"
+    },
+    "Next" : {
+      "extractionState" : "manual"
+    },
+    "Outerwear" : {
+      "extractionState" : "manual"
+    },
+    "Select Sizes" : {
+      "extractionState" : "manual"
+    },
+    "Set your preferences to personalize your experience." : {
+      "extractionState" : "manual"
+    },
+    "Tops" : {
+      "extractionState" : "manual"
+    },
+    "What are you shopping\\nfor?" : {
+      "extractionState" : "manual"
+    },
+    "Womenswear" : {
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.1"
+}
