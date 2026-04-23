@@ -16,11 +16,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published var location: CLLocation?
     @Published var errorMessage: String?
+    @Published var isAuthorized: Bool = false
+
     
     override init() {
         super.init()
         locationManager.delegate = self
         checkAuthorizationStatus()
+        checkPermission()
     }
     
     func requestPermission() {
@@ -40,6 +43,24 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         errorMessage = error.localizedDescription
         location = nil
+    }
+    
+    func checkPermission() {
+        let status = locationManager.authorizationStatus
+        
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            isAuthorized = true
+            
+        case .denied, .restricted:
+            isAuthorized = false
+            
+        case .notDetermined:
+            isAuthorized = false
+            
+        @unknown default:
+            isAuthorized = false
+        }
     }
     
     private func checkAuthorizationStatus() {

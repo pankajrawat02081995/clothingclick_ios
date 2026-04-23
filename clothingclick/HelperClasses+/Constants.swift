@@ -25,6 +25,21 @@ struct Constants {
     static let turnOnLocation = "Turn on Location"
     static let openSettings = "Open Settings"
     static let locationAccessGranted = "Location Access Granted"
+    static let AppName = "ClothingClick"
+    static let notifications = "Notifications"
+    static let confirm = "Confirm"
+    static let delete = "Delete"
+    static let locationViewTitle = "Your address will never be shared"
+    static let addressOrPostalCode = "Address or Postal Code"
+    static let save = "Save"
+    static let location = "Location"
+    static let seller = "Seller"
+    static let reviews = "Reviews"
+    static let posts = "Posts"
+    static let recentlyViewed = "Recently Viewed"
+    static let moreFromSeller = "More from seller"
+    static let viewOnMap = "View on Map"
+    static let chat = "Chat"
 }
 
 struct AppColor {
@@ -33,7 +48,7 @@ struct AppColor {
     static let blueColor: Color = Color("BlueColor")
     static let darkGrayColor: Color = Color("DarkGrayColor")
     static let grayColor: Color = Color("GrayColor")
-    static let lightGrayColor: Color = Color("lightGrayColor")
+    static let lightGrayColor: Color = Color("LightGrayColor")
     static let greenColor: Color = Color("GreenColor")
     static let lightGreenColor: Color = Color("lightGreenColor")
     static let redColor: Color = Color("RedColor")
@@ -41,6 +56,8 @@ struct AppColor {
     static let grayTabColor: Color = Color("GrayTabColor")
     static let borderColor: Color = Color("BorderColor")
     static let clearColor: Color = Color(.clear)
+    static let grayTextColor: Color = Color("GrayTextColor")
+    static let darkGrayTextColor: Color = Color("DarkGrayTextColor")
 }
 
 enum CategoryType: String {
@@ -56,31 +73,3 @@ enum DashboardTab: Hashable {
     case messages
     case account
 }
-
-
-
-//Colors Refernece
-//  filename: BlackColor.colorset
-//
-//  filename: BlueColor.colorset
-//
-//  filename: BorderColor.colorset
-//  E9E9E9
-
-//  filename: DarkGrayColor.colorset
-//
-//  filename: GrayColor.colorset
-//
-//  filename: GrayTabColor.colorset
-//
-//  filename: GreenColor.colorset
-//
-//  filename: LightGrayColor.colorset
-//
-//  filename: LightGreenColor.colorset
-//
-//  filename: MediumRedColor.colorset
-//
-//  filename: RedColor.colorset
-//
-//  filename: WhiteColor.colorset

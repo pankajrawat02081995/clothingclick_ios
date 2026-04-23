@@ -54,6 +54,8 @@ struct CustomNavigationBar: ViewModifier {
                             }
                             if let title = leading.title {
                                 Text(title)
+                                    .font(leading.font)
+                                    .foregroundStyle(leading.tint ?? Color.black)
                             }
                         }
                         .onTapGesture {
@@ -78,6 +80,8 @@ struct CustomNavigationBar: ViewModifier {
                                     }
                                     if let title = item.title {
                                         Text(title)
+                                            .font(item.font)
+                                            .foregroundStyle(item.tint ?? Color.black)
                                     }
                                 }
                                 .onTapGesture {

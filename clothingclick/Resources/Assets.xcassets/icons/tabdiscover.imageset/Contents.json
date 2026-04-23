@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "tabdiscover.png",
+      "filename" : "tabdiscover.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tabdiscover@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tabdiscover@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

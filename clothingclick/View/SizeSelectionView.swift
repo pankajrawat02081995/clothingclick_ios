@@ -12,6 +12,7 @@ struct SizeSelectionView: View {
     @State private var showLocationPermission = false
     @StateObject var vm: SizeSelectionViewModel
     @Environment(\.dismiss) var dismiss
+    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -56,18 +57,33 @@ struct SizeSelectionView: View {
 
             Spacer()
             
-            Button(action: {
-                showLocationPermission = true                
-            }) {
-                Text(Constants.next)
-                    .font(AppFont.medium.font(size: 15.0))
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(AppColor.blackColor)
-                    .foregroundColor(AppColor.whiteColor)
-                    .cornerRadius(8)
+            if locationManager.isAuthorized {
+                NavigationLink(destination: MainTabView()) {
+                    VStack {
+                        Text(Constants.next)
+                            .font(AppFont.medium.font(size: 15.0))
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(AppColor.blackColor)
+                            .foregroundColor(AppColor.whiteColor)
+                            .cornerRadius(8)
+                    }
+                    .padding(.horizontal)
+                }
+            } else {
+                Button(action: {
+                    showLocationPermission = true
+                }) {
+                    Text(Constants.next)
+                        .font(AppFont.medium.font(size: 15.0))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(AppColor.blackColor)
+                        .foregroundColor(AppColor.whiteColor)
+                        .cornerRadius(8)
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
         }
         .overlay(content: {
             if showLocationPermission == true {
@@ -90,7 +106,16 @@ struct SizeSelectionView: View {
                     }
                 ),
                 
-                trailing: []
+                trailing: [NavBarItem(
+                    title: "Skip",
+                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                    image: "",
+                    isSystemImage: false,
+                    tint: AppColor.borderColor,
+                    action: {
+                        print("Skip tapped")
+                    }
+                ),]
             )
         )
         .padding(0)

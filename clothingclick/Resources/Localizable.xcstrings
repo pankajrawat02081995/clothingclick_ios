@@ -1,17 +1,65 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
+    "$%lld" : {
+
+    },
+    "$45" : {
+
+    },
+    "4.9 (9 %@" : {
+
+    },
+    "Account" : {
+
+    },
+    "Blue Tshirt" : {
+
+    },
     "Both" : {
       "extractionState" : "manual"
     },
     "Bottoms" : {
       "extractionState" : "manual"
     },
+    "Brwose" : {
+
+    },
+    "Category" : {
+
+    },
+    "Chat" : {
+
+    },
+    "ClothingClick" : {
+
+    },
+    "Condition" : {
+
+    },
+    "Discover" : {
+
+    },
+    "Filters" : {
+
+    },
     "Footwear" : {
       "extractionState" : "manual"
     },
+    "Home" : {
+
+    },
+    "Looking For?" : {
+
+    },
     "Menswear" : {
       "extractionState" : "manual"
+    },
+    "Messages" : {
+
     },
     "Next" : {
       "extractionState" : "manual"
@@ -22,11 +70,23 @@
     "Select Sizes" : {
       "extractionState" : "manual"
     },
+    "Sell" : {
+
+    },
     "Set your preferences to personalize your experience." : {
       "extractionState" : "manual"
     },
+    "Size" : {
+
+    },
     "Tops" : {
       "extractionState" : "manual"
+    },
+    "Toronto" : {
+
+    },
+    "View on Map" : {
+
     },
     "What are you shopping\\nfor?" : {
       "extractionState" : "manual"

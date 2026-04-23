@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "tabsell.png",
+      "filename" : "tabsell.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tabsell@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tabsell@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
