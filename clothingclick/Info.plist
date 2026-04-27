@@ -8,8 +8,11 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-SemiBold.ttf</string>
+		<string>Roboto-Bold.ttf</string>
 	</array>
 	<key>UIDesignRequiresCompatibility</key>
 	<true/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

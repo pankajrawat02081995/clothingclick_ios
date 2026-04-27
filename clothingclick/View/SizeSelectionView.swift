@@ -161,39 +161,16 @@ struct SizeSelectionView: View {
     }
 
     private func sizeCategory(title: String, sizes: [String], alt: String) -> some View {
-        let columns = [
-            GridItem(.adaptive(minimum: 65), spacing: 10)
-        ]
-
-        return VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .center) {
-                Image(alt)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                Text(title)
-                    .foregroundStyle(AppColor.blackColor)
-                    .font(AppFont.regular.font(size: 17.0))
-            }
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(sizes, id: \.self) { size in
-                    Button(action: {
-                        vm.selectSize(tab: vm.selectedTab, category: title, size: size)
-                    }) {
-                        Text(size)
-                            .font(AppFont.regular.font(size: 13.0))
-                            .frame(width: 65, height: 36)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke((vm.selectedSize(tab: vm.selectedTab, category: title) == size ? AppColor.blackColor : AppColor.borderColor), lineWidth: 1)
-                            )
-                            .background(vm.selectedSize(tab: vm.selectedTab, category: title) == size ? AppColor.blackColor : AppColor.clearColor)
-                            .foregroundColor(vm.selectedSize(tab: vm.selectedTab, category: title) == size ? AppColor.whiteColor : AppColor.blackColor)
-                            .cornerRadius(8)
-                    }
-                }
-            }
+        SizeCategoryView(
+            title: title,
+            titleFont: nil,
+            sizes: sizes,
+            icon: alt,
+            isSystemImage: false,
+            selectedSize: vm.selectedSize(tab: vm.selectedTab, category: title),
+            strokeColors: nil
+        ) { size in
+            vm.selectSize(tab: vm.selectedTab, category: title, size: size)
         }
-        .padding(0)
     }
 }

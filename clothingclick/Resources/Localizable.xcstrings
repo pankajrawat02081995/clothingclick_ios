@@ -4,19 +4,73 @@
     "%@" : {
 
     },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
     "$%lld" : {
+
+    },
+    "$16.00" : {
 
     },
     "$45" : {
 
     },
+    "1 Week Ago" : {
+
+    },
+    "3 %@ 9 %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3 %1$@ 9 %2$@"
+          }
+        }
+      }
+    },
     "4.9 (9 %@" : {
+
+    },
+    "67" : {
+
+    },
+    "232" : {
+
+    },
+    "532" : {
+
+    },
+    "1234 1234 1234 1234" : {
 
     },
     "Account" : {
 
     },
-    "Blue Tshirt" : {
+    "Aman" : {
+
+    },
+    "aman357" : {
+
+    },
+    "Auctor quis sagittis sit ac et praesent nulla malesuada. Purus ornare eget quisque tellus dui a eu. Enim tincidunt sagittis hac tincidunt. Vehicula elit massa nibh a at. Interdum lacinia eu sem malesuada." : {
 
     },
     "Both" : {
@@ -28,19 +82,16 @@
     "Brwose" : {
 
     },
-    "Category" : {
-
-    },
-    "Chat" : {
-
-    },
     "ClothingClick" : {
 
     },
-    "Condition" : {
+    "Discover" : {
 
     },
-    "Discover" : {
+    "Edmonton" : {
+
+    },
+    "Edmonton 36 i 34f" : {
 
     },
     "Filters" : {
@@ -48,6 +99,9 @@
     },
     "Footwear" : {
       "extractionState" : "manual"
+    },
+    "Free" : {
+
     },
     "Home" : {
 
@@ -76,16 +130,10 @@
     "Set your preferences to personalize your experience." : {
       "extractionState" : "manual"
     },
-    "Size" : {
-
-    },
     "Tops" : {
       "extractionState" : "manual"
     },
     "Toronto" : {
-
-    },
-    "View on Map" : {
 
     },
     "What are you shopping\\nfor?" : {

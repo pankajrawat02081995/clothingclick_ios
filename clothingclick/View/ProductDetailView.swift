@@ -12,13 +12,22 @@ struct ProductDetailView: View {
     var product: Product
     
     @State private var isActiveViewOnMap: Bool = false
+    @Environment(\.dismiss) var dismiss
+    @State var banners: [Banner] = []
+    @State var currentBanner: Int = 0
+    @State private var isActiveBuyNow: Bool = true
+    @State private var isActiveBuyNowView: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
-            
+            CustomDivider(color: AppColor.borderColor, lineWidth: 1)
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    productImage
+                  
+                    if banners.count > 0 {
+                        productSlides
+                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width+((UIScreen.main.bounds.size.width*34.6)/100))
+                    }
                     productInfo
                         .padding(.horizontal)
                     CustomDivider(color: AppColor.borderColor, lineWidth: 1)
@@ -41,8 +50,14 @@ struct ProductDetailView: View {
             CustomDivider(color: AppColor.borderColor, lineWidth: 1)
             bottomBar
         }
+        .onAppear() {
+            banners = Banner.sample
+        }
         .navigationDestination(isPresented: $isActiveViewOnMap) {
             LocationView()
+        }
+        .navigationDestination(isPresented: $isActiveBuyNowView) {
+            BuyNowView()
         }
         .customNavigationBar(
             config:NavBarConfig(
@@ -56,6 +71,7 @@ struct ProductDetailView: View {
                     isSystemImage: false,
                     action: {
                         print("back tapped")
+                        self.dismiss()
                     }
                 ),
                 
@@ -73,27 +89,57 @@ struct ProductDetailView: View {
 
     }
     
-    private var productImage: some View {
-        ZStack(alignment: .bottomLeading) {
-            AsyncImage(url: URL(string: "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(169/182, contentMode: .fit)
-                    .frame(maxWidth: .infinity)
-            } placeholder: {
-                Image(.mfootwear)
-                    .resizable()
-                    .aspectRatio(169/182, contentMode: .fit)
-                    .frame(maxWidth: .infinity)
+    private var productSlides: some View {
+        SlideShowView(
+            items: banners,
+            autoScroll: true,
+            interval: 3.0,
+            currentIndex: $currentBanner,
+            indexDisplayMode: .never
+        ) { item in
+            NavigationLink {
+                let images = banners.map({ $0.imageUrl })
+                if images.count > 0 {
+                    ProductImageViewer(images: images, selectedIndex: currentBanner)
+                }
+            } label: {
+                productImage(banner: banners[currentBanner])
             }
-
+        }
+    }
+    
+    private func productImage(banner: Banner) -> some View {
+       ZStack(alignment: .bottomLeading) {
+            
+            GeometryReader { geo in
+                
+                let width = geo.size.width
+                let height = geo.size.width+((geo.size.width*34.6)/100)
+                
+                ZStack {
+                    AsyncImage(url: URL(string: banner.imageUrl)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                }
+                .frame(width: width, height: height)
+            }
             
             
+            // Indicator
             HStack(spacing: 4) {
-                ForEach(0..<4) { _ in
+                ForEach(0..<banners.count, id: \.self) { index in
                     Circle()
+                        .fill(index == currentBanner ? AppColor.whiteColor : AppColor.grayColor)
+                        .overlay(
+                            Circle().stroke(AppColor.blackColor, lineWidth: 1)
+                        )
                         .frame(width: 6, height: 6)
-                        .foregroundColor(.gray.opacity(0.5))
                 }
             }
             .padding(8)
@@ -111,7 +157,7 @@ struct ProductDetailView: View {
                 .foregroundStyle(AppColor.blackColor)
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Size")
+                    Text(Constants.size)
                         .font(AppFont.medium.font(size: 13))
                         .foregroundStyle(AppColor.darkGrayTextColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -122,7 +168,7 @@ struct ProductDetailView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Condition")
+                    Text(Constants.condition)
                         .font(AppFont.medium.font(size: 13))
                         .foregroundStyle(AppColor.darkGrayTextColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -132,7 +178,7 @@ struct ProductDetailView: View {
                 }
                 .frame(maxWidth: .infinity)
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Category")
+                    Text(Constants.category)
                         .font(AppFont.medium.font(size: 13))
                         .foregroundStyle(AppColor.darkGrayTextColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -143,9 +189,21 @@ struct ProductDetailView: View {
                 .frame(maxWidth: .infinity)
             }
             
-            Text(product.location)
-                .font(AppFont.medium.font(size: 20.0))
-                .foregroundStyle(AppColor.grayTextColor)
+            HStack(alignment: .top) {
+                NavigationLink {
+                    MapView()
+                } label: {
+                    Text(product.location)
+                        .font(AppFont.medium.font(size: 20.0))
+                        .foregroundStyle(AppColor.blueColor)
+                }
+                Spacer()
+                Image(.clock)
+                Text("1 Week Ago")
+                    .font(AppFont.medium.font(size: 13.0))
+                    .foregroundStyle(AppColor.blackColor)
+            }
+            .padding(.top, 10)
         }
         
     }
@@ -195,8 +253,9 @@ struct ProductDetailView: View {
                 }
                 
                 Spacer()
-                
-                Image(systemName: "chevron.right")
+                NavigationLink(destination: ProfileView()) {
+                    Image(.rightArrow)
+                }
             }
             .padding()
             .background(AppColor.lightGrayColor)
@@ -254,19 +313,38 @@ struct ProductDetailView: View {
     private var bottomBar: some View {
         HStack {
             
-            Button(action: {}) {
-                HStack {
-                    Image(.chat)
-                    Text(Constants.chat)
-                        .font(AppFont.medium.font(size: 15))
-                        .foregroundStyle(AppColor.whiteColor)
+            if isActiveBuyNow {
+                Button(action: {
+                    isActiveBuyNowView = true
+                }) {
+                    HStack {
+                        Image(.cart)
+                        Text(Constants.buyNow)
+                            .font(AppFont.medium.font(size: 15))
+                            .foregroundStyle(AppColor.whiteColor)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(AppColor.blackColor)
+                    .foregroundColor(AppColor.whiteColor)
+                    .cornerRadius(5)
+                    
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(AppColor.blackColor)
-                .foregroundColor(AppColor.whiteColor)
-                .cornerRadius(8)
-
+            } else {
+                Button(action: {}) {
+                    HStack {
+                        Image(.chat)
+                        Text(Constants.chat)
+                            .font(AppFont.medium.font(size: 15))
+                            .foregroundStyle(AppColor.whiteColor)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(AppColor.blackColor)
+                    .foregroundColor(AppColor.whiteColor)
+                    .cornerRadius(5)
+                    
+                }
             }
             
             Button(action: {
@@ -282,7 +360,7 @@ struct ProductDetailView: View {
                 .padding()
                 .background(AppColor.blackColor)
                 .foregroundColor(AppColor.whiteColor)
-                .cornerRadius(8)
+                .cornerRadius(5)
             }
         }
         .padding()

@@ -19,6 +19,7 @@ struct NavBarItem {
 struct NavBarConfig {
     var title: String
     var font: Font
+    var tint: Color?
     var leading: NavBarItem? = nil
     var trailing: [NavBarItem] = []
 }
@@ -38,6 +39,7 @@ struct CustomNavigationBar: ViewModifier {
                 ToolbarItem(placement: .principal) {
                     Text(config.title)
                         .font(config.font)
+                        .foregroundStyle(config.tint ?? Color.black)
                 }
                 
                 if let leading = config.leading,
@@ -48,8 +50,10 @@ struct CustomNavigationBar: ViewModifier {
                             if let image = leading.image {
                                 if leading.isSystemImage == true {
                                     Image(systemName: image)
+                                        .renderingMode((leading.tint != nil) ? .template : .original)
                                 } else {
                                     Image(image)
+                                        .renderingMode((leading.tint != nil) ? .template : .original)
                                 }
                             }
                             if let title = leading.title {
@@ -58,6 +62,7 @@ struct CustomNavigationBar: ViewModifier {
                                     .foregroundStyle(leading.tint ?? Color.black)
                             }
                         }
+                        .foregroundStyle((leading.tint != nil) ? leading.tint! : .black)
                         .onTapGesture {
                             leading.action?()
                         }
@@ -74,16 +79,18 @@ struct CustomNavigationBar: ViewModifier {
                                     if let image = item.image {
                                         if item.isSystemImage == true {
                                             Image(systemName: image)
+                                                .renderingMode((item.tint != nil) ? .template : .original)
                                         } else {
                                             Image(image)
+                                                .renderingMode((item.tint != nil) ? .template : .original)
                                         }
                                     }
                                     if let title = item.title {
                                         Text(title)
                                             .font(item.font)
-                                            .foregroundStyle(item.tint ?? Color.black)
                                     }
                                 }
+                                .foregroundStyle((item.tint != nil) ? item.tint! : .black)
                                 .onTapGesture {
                                     item.action?()
                                 }

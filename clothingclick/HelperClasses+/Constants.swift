@@ -40,6 +40,48 @@ struct Constants {
     static let moreFromSeller = "More from seller"
     static let viewOnMap = "View on Map"
     static let chat = "Chat"
+    static let buyNow = "Buy Now"
+    static let size = "Size"
+    static let condition = "Condition"
+    static let delivery = "Delivery"
+    static let pay = "Pay"
+    static let allPaymentsAreSecureAndEncryped = "All payments are secure and encryped"
+    static let payment = "Payment"
+    static let orPayWithCard = "Or pay with card"
+    static let email = "Email"
+    static let name = "Name"
+    static let enterHere = "Enter here"
+    static let shippingDetails = "Shipping Details"
+    static let cardInformation = "Card Information"
+    static let address = "Address"
+    static let enterAddressManually = "Enter address manually"
+    static let paymentDetails = "Payment Details"
+    static let mmyy = "MM/YY"
+    static let cvc = "CVC"
+    static let billingAddressIsSameAsShipping = "Billing address is same as shipping"
+    static let addressesAreSecureAndEncrypted = "Addresses are secure and encrypted"
+    static let countryRegion = "Country/Region"
+    static let dscvdvds = "Enter here"
+    static let firstName = "First Name"
+    static let lastName = "Last Name"
+    static let city = "City"
+    static let state = "State"
+    static let postalCode = "Postal Code"
+    static let pickupLocation = "Pickup Location"
+    static let phone = "Phone"
+    static let optional = "Optional"
+    static let company = "Company"
+    static let apartmentEtc = "Apartment, suite, etc."
+    static let province = "Province"
+    static let shippingMethod = "Shipping method"
+    static let standard = "Standard"
+    static let businessDays = "business days"
+    static let to = "to"
+    static let category = "Category"
+    static let followers = "Followers"
+    static let following = "Following"
+    static let follow = "Follow"
+    static let searchProfiles = "Search Profiles"
 }
 
 struct AppColor {
@@ -58,6 +100,7 @@ struct AppColor {
     static let clearColor: Color = Color(.clear)
     static let grayTextColor: Color = Color("GrayTextColor")
     static let darkGrayTextColor: Color = Color("DarkGrayTextColor")
+    static let brownGrayColor: Color = Color("BrownGrayColor")
 }
 
 enum CategoryType: String {

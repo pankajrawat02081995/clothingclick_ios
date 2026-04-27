@@ -14,7 +14,7 @@ struct LocationView: View {
         center: CLLocationCoordinate2D(latitude: 53.5461, longitude: -113.4938), // Edmonton
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-    
+    @Environment(\.dismiss) var dismiss
     @State private var address: String = ""
     @FocusState private var isFocused: Bool
     
@@ -34,15 +34,18 @@ struct LocationView: View {
                 leading: NavBarItem(
                     title: "",
                     font: .system(size: 14),
-                    image: "chevron.left",
-                    isSystemImage: true,
+                    image: "back",
+                    isSystemImage: false,
                     tint: .black,
                     action: {
                         // dismiss
+                        self.dismiss()
                     }
                 )
             )
         )
+        .toolbarBackground(.visible, for: .navigationBar)
+
     }
     
     private var bottomCard: some View {
