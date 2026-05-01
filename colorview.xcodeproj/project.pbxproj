@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 637667AE2F95EDBE00BCD811 /* Build configuration list for PBXProject "clothingclick" */;
+			buildConfigurationList = 637667AE2F95EDBE00BCD811 /* Build configuration list for PBXProject "colorview" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -343,7 +343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		637667AE2F95EDBE00BCD811 /* Build configuration list for PBXProject "clothingclick" */ = {
+		637667AE2F95EDBE00BCD811 /* Build configuration list for PBXProject "colorview" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				637667BC2F95EDC000BCD811 /* Debug */,

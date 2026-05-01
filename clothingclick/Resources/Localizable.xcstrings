@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    " until 10:00PM" : {
+
+    },
     "%@" : {
 
     },
@@ -14,6 +20,16 @@
         }
       }
     },
+    "%@ %lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld %3$@"
+          }
+        }
+      }
+    },
     "%lld %@" : {
       "localizations" : {
         "en" : {
@@ -23,6 +39,9 @@
           }
         }
       }
+    },
+    "$" : {
+
     },
     "$%lld" : {
 
@@ -46,7 +65,7 @@
         }
       }
     },
-    "4.9 (9 %@" : {
+    "4.9 (9 %@)" : {
 
     },
     "67" : {
@@ -62,6 +81,9 @@
 
     },
     "Account" : {
+
+    },
+    "AI Selling" : {
 
     },
     "Aman" : {
@@ -94,6 +116,9 @@
     "Edmonton 36 i 34f" : {
 
     },
+    "Filter" : {
+
+    },
     "Filters" : {
 
     },
@@ -118,8 +143,20 @@
     "Next" : {
       "extractionState" : "manual"
     },
+    "No results found" : {
+
+    },
+    "Open" : {
+
+    },
+    "Open Apple apple.com" : {
+
+    },
     "Outerwear" : {
       "extractionState" : "manual"
+    },
+    "Popular Brands Listing" : {
+
     },
     "Select Sizes" : {
       "extractionState" : "manual"
@@ -130,10 +167,16 @@
     "Set your preferences to personalize your experience." : {
       "extractionState" : "manual"
     },
+    "Store Hours" : {
+
+    },
     "Tops" : {
       "extractionState" : "manual"
     },
     "Toronto" : {
+
+    },
+    "until 8:00 PM" : {
 
     },
     "What are you shopping\\nfor?" : {

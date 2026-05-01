@@ -14,6 +14,7 @@ struct SlideShowView<Item: Identifiable, Content: View>: View {
     let interval: TimeInterval
     @Binding var currentIndex: Int
     var indexDisplayMode: PageTabViewStyle.IndexDisplayMode = .automatic
+    var customIndexDisplayMode: Bool = false
     
     let content: (Item) -> Content
    
@@ -21,23 +22,37 @@ struct SlideShowView<Item: Identifiable, Content: View>: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            TabView(selection: $currentIndex) {
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    content(item)
-                        .tag(index)
+            ZStack(alignment: .bottomLeading) {
+                TabView(selection: $currentIndex) {
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        content(item)
+                            .tag(index)
+                    }
                 }
-            }
-            .tabViewStyle(
-                PageTabViewStyle(
-                    indexDisplayMode: items.count > 1 ? indexDisplayMode : .never
+                .tabViewStyle(
+                    PageTabViewStyle(
+                        indexDisplayMode: items.count > 1 ? indexDisplayMode : .never
+                    )
                 )
-            )
-            .onAppear {
-                startAutoScroll()
-            }
-            .onDisappear {
-                stopAutoScroll()
+                .onAppear {
+                    startAutoScroll()
+                }
+                .onDisappear {
+                    stopAutoScroll()
+                }
+                // Indicator
+                HStack(spacing: 4) {
+                    ForEach(0..<items.count, id: \.self) { index in
+                        Circle()
+                            .fill(index == currentIndex ? AppColor.whiteColor : AppColor.grayColor)
+                            .overlay(
+                                Circle().stroke(AppColor.blackColor, lineWidth: 1)
+                            )
+                            .frame(width: 6, height: 6)
+                    }
+                }
+                .padding(8)
+                .allowsHitTesting(false)
             }
         }
     }

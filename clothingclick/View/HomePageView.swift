@@ -13,7 +13,7 @@ struct HomePageView: View {
         let products = Product.mockData
         
         var body: some View {
-            NavigationStack {
+//            NavigationStack {
                 VStack(spacing: 0) {
                     CustomDivider(color: AppColor.borderColor)
                     VStack(alignment: .leading, spacing: 16
@@ -54,7 +54,7 @@ struct HomePageView: View {
                 }
           
                 .padding(0.2)
-            }
+//            }
            
         }
     
@@ -179,6 +179,7 @@ struct HomePageView: View {
             HStack {
                 Text(product.name)
                     .font(AppFont.regular.font(size: 13))
+                    .foregroundStyle(AppColor.blackColor)
                 Spacer()
                 Image(.heart)
                     .padding(.top, 5)
@@ -186,6 +187,8 @@ struct HomePageView: View {
             
             Text("$\(product.price)")
                 .font(AppFont.medium.font(size: 15))
+                .foregroundStyle(AppColor.blackColor)
+
         }
     }
     

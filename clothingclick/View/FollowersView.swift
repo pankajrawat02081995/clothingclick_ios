@@ -80,7 +80,7 @@ struct FollowersView: View {
                 trailing: []
             )
         )
-
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 

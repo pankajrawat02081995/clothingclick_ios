@@ -18,20 +18,20 @@ struct CustomTabBarView<T: Hashable>: View {
         VStack(spacing: 0) {
             HStack {
                 ForEach(tabs, id: \.self) { tab in
-                    
-                    VStack {
+                    VStack(spacing: 0) {
                         Text(title(tab))
-                            .foregroundColor(selectedTab == tab ? .black : .gray)
-                        
+                            .foregroundColor(selectedTab == tab ? AppColor.blackColor : AppColor.darkGrayColor)
+                            .padding(10)
                         Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(selectedTab == tab ? .black : .clear)
+                            .frame(height: 1)
+                            .foregroundColor(selectedTab == tab ? AppColor.blackColor : AppColor.clearColor)
                     }
                     .onTapGesture {
                         onSelect(tab)
                     }
                 }
             }
+            Divider()
         }
     }
 }

@@ -14,12 +14,22 @@ struct ProfileView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 0) {
                 profileSection
                     .padding()
                 Divider()
-                
-//                ProductGridView(products: vm.products)
+                    .padding(0)
+                if vm.products.count == 0 {
+                    PrivateAccountView()
+                        .padding()
+                } else {
+                    sellingAndSoldSection
+                        .padding(0)
+                }
+            }
+            .onAppear() {
+                vm.isFacebookLinked = true
+                vm.isInstagramLinked = true
             }
             
         }
@@ -80,7 +90,8 @@ struct ProfileView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .allowsHitTesting(false)
-                    VStack(alignment: .leading) {                            Text("532")
+                    VStack(alignment: .leading) {
+                        Text("532")
                             .foregroundStyle(AppColor.blackColor)
                             .font(AppFont.medium.font(size: 15))
                         Text(Constants.following)
@@ -141,14 +152,103 @@ struct ProfileView: View {
             }
             HStack(alignment: .center, spacing: 2) {
                 Image(.star)
-                
-                Text("4.9 (9 \(Constants.reviews)")
-                    .font(AppFont.regular.font(size: 13))
-                    .foregroundStyle(AppColor.blackColor)
+                NavigationLink {
+                    ReviewsView()
+                } label: {
+                    Text("4.9 (9 \(Constants.reviews))")
+                        .font(AppFont.regular.font(size: 13))
+                        .foregroundStyle(AppColor.blackColor)
+                }
             }
             Text("Auctor quis sagittis sit ac et praesent nulla malesuada. Purus ornare eget quisque tellus dui a eu. Enim tincidunt sagittis hac tincidunt. Vehicula elit massa nibh a at. Interdum lacinia eu sem malesuada.")
                 .font(AppFont.regular.font(size: 13))
                 .foregroundStyle(AppColor.blackColor)
+            if vm.isFacebookLinked || vm.isInstagramLinked {
+                HStack {
+                    if vm.isFacebookLinked {
+                        Button(action: { }) {
+                            HStack {
+                                Image(.roundFacebookLogo)
+                                    .cornerRadius(5)
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColor.borderColor,lineWidth: 1)
+                                    }
+                            }
+                               
+                        }
+                    }
+                    if vm.isInstagramLinked {
+                        Button(action: { }) {
+                            HStack {
+                                Image(.instagramLogo)
+                                    .cornerRadius(5)
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColor.borderColor,lineWidth: 1)
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private var sellingAndSoldSection: some View {
+        VStack {
+            CustomTabBarView(
+                tabs: vm.tabs,
+                selectedTab: vm.selectedTab,
+                title: { $0 + "(236)"}
+            ) { tab in
+                vm.selectedTab = tab
+            }
+            HStack {
+                Text("AI Selling")
+                    .foregroundStyle(AppColor.blackColor)
+                    .font(AppFont.regular.font(size: 17))
+                Spacer()
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Image("filter")
+                        Text("Filter")
+                            .foregroundStyle(AppColor.blackColor)
+                            .font(AppFont.regular.font(size: 13))
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical,10)
+            
+            ProductGridView(
+                title: nil,
+                items: vm.products,
+                columns: [
+                    GridItem(.flexible()),
+                    GridItem(.flexible())
+                ],
+                content: { product in
+                    ProductCardView(
+                        imageURL: product.image,
+                        title: product.name,
+                        price: "$\(product.price)",
+                        isFavorite: product.isFavorite
+                    ) {
+                        vm.toggleFavorite(product)
+                    }
+                },
+                destination: { product in
+                    ProductDetailView(product: product)
+                }
+            )
+            .padding(.horizontal)
         }
     }
 }

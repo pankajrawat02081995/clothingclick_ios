@@ -18,6 +18,17 @@ class ProfileViewModel: ObservableObject {
         image: "profile"
     )
     
+    let tabs: [String] = ["Selling","Sold"]
+    @Published var selectedTab: String = "Selling"
+    
     @Published var products: [Product] = Product.mockData
     @Published var isFollowing: Bool = false
+    @Published var isFacebookLinked: Bool = false
+    @Published var isInstagramLinked: Bool = false
+    
+    func toggleFavorite(_ product:Product) {
+        if let index = products.firstIndex(where: { $0.id == product.id }) {
+            products[index].isFavorite = !product.isFavorite
+        }
+    }
 }

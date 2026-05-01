@@ -82,6 +82,22 @@ struct Constants {
     static let following = "Following"
     static let follow = "Follow"
     static let searchProfiles = "Search Profiles"
+    static let contacts = "Contacts"
+    static let privateAccount = "Private Account"
+    static let followThisAccountToSeeTheirListings = "Follow this account to see their listings"
+    static let seeAll = "See all"
+    static let searchProductsAndProfiles = "Search Products & Profiles"
+    static let searchWithDots = "Search..."
+    static let filter = "Filter"
+    static let results = "Results"
+    static let view = "View"
+    static let result = "Result"
+    static let clearAll = "Clear all"
+    static let style = "Style"
+    static let popularBrand = "Popular Brand"
+    static let brand = "Brand"
+    static let colors = "Colors"
+    static let searchDesignersAndBrandNames = "Search Designers & Brand Names"
 }
 
 struct AppColor {
@@ -92,7 +108,7 @@ struct AppColor {
     static let grayColor: Color = Color("GrayColor")
     static let lightGrayColor: Color = Color("LightGrayColor")
     static let greenColor: Color = Color("GreenColor")
-    static let lightGreenColor: Color = Color("lightGreenColor")
+    static let lightGreenColor: Color = Color("LightGreenColor")
     static let redColor: Color = Color("RedColor")
     static let mediumRedColor: Color = Color("MediumRedColor")
     static let grayTabColor: Color = Color("GrayTabColor")

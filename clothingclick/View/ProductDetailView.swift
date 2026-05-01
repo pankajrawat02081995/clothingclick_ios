@@ -26,7 +26,8 @@ struct ProductDetailView: View {
                   
                     if banners.count > 0 {
                         productSlides
-                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width+((UIScreen.main.bounds.size.width*34.6)/100))
+//                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width+((UIScreen.main.bounds.size.width*34.6)/100)) // base on figma
+                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width-((UIScreen.main.bounds.size.width*20)/100)) // base on old app
                     }
                     productInfo
                         .padding(.horizontal)
@@ -95,7 +96,8 @@ struct ProductDetailView: View {
             autoScroll: true,
             interval: 3.0,
             currentIndex: $currentBanner,
-            indexDisplayMode: .never
+            indexDisplayMode: .never,
+            customIndexDisplayMode: true
         ) { item in
             NavigationLink {
                 let images = banners.map({ $0.imageUrl })
@@ -109,14 +111,8 @@ struct ProductDetailView: View {
     }
     
     private func productImage(banner: Banner) -> some View {
-       ZStack(alignment: .bottomLeading) {
-            
             GeometryReader { geo in
-                
-                let width = geo.size.width
-                let height = geo.size.width+((geo.size.width*34.6)/100)
-                
-                ZStack {
+                ZStack(alignment: .center) {
                     AsyncImage(url: URL(string: banner.imageUrl)) { image in
                         image
                             .resizable()
@@ -125,25 +121,11 @@ struct ProductDetailView: View {
                         Image(systemName: "photo.on.rectangle.angled")
                             .resizable()
                             .scaledToFit()
+                            .foregroundStyle(AppColor.blackColor)
                     }
                 }
-                .frame(width: width, height: height)
+                .frame(width: geo.size.width, height: geo.size.height)
             }
-            
-            
-            // Indicator
-            HStack(spacing: 4) {
-                ForEach(0..<banners.count, id: \.self) { index in
-                    Circle()
-                        .fill(index == currentBanner ? AppColor.whiteColor : AppColor.grayColor)
-                        .overlay(
-                            Circle().stroke(AppColor.blackColor, lineWidth: 1)
-                        )
-                        .frame(width: 6, height: 6)
-                }
-            }
-            .padding(8)
-        }
     }
     
     private var productInfo: some View {
@@ -242,14 +224,16 @@ struct ProductDetailView: View {
                     Text(product.sellerName+"· 560 \(Constants.posts.lowercased())")
                         .font(AppFont.medium.font(size: 13))
                         .foregroundStyle(AppColor.darkGrayTextColor)
-                    HStack(alignment: .center, spacing: 2) {
-                        Image(.star)
-                        
-                        Text("4.9 (9 \(Constants.reviews)")
-                            .font(AppFont.medium.font(size: 10))
-                            .foregroundStyle(AppColor.darkGrayTextColor)
+                    NavigationLink {
+                        ReviewsView()
+                    } label: {
+                        HStack(alignment: .center, spacing: 2) {
+                            Image(.star)
+                            Text("4.9 (9 \(Constants.reviews))")
+                                .font(AppFont.medium.font(size: 10))
+                                .foregroundStyle(AppColor.darkGrayTextColor)
+                        }
                     }
-                   
                 }
                 
                 Spacer()

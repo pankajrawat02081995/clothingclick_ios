@@ -30,43 +30,43 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigationStack {
+//            NavigationStack {
                 HomePageView()
                     .navigationDestination(isPresented: $goToNotifications) {
                             NotificationsView()
                         }
-            }
-            .customNavigationBar(
-                config:NavBarConfig(
-                    title: Constants.AppName,
-                    font: AppFont.medium.font(size: 13.0),
-                    
-                    leading: NavBarItem(
-                        title: "Toronto",
-                        font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-                        image: "headerlocation",
-                        isSystemImage: false,
-                        action: {
-                            print("location tapped")
-                        }
-                    ),
-                    
-                    trailing: [NavBarItem(
-                        title: "",
-                        font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-                        image: "bell",
-                        isSystemImage: false,
-                        action: {
-                            print("notification tapped")
-                            goToNotifications = true
-                        }
-                    )]
-                )
-            )
+//            }
+//            .customNavigationBar(
+//                config:NavBarConfig(
+//                    title: Constants.AppName,
+//                    font: AppFont.medium.font(size: 13.0),
+//                    
+//                    leading: NavBarItem(
+//                        title: "Toronto",
+//                        font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+//                        image: "headerlocation",
+//                        isSystemImage: false,
+//                        action: {
+//                            print("location tapped")
+//                        }
+//                    ),
+//                    
+//                    trailing: [NavBarItem(
+//                        title: "",
+//                        font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+//                        image: "bell",
+//                        isSystemImage: false,
+//                        action: {
+//                            print("notification tapped")
+//                            goToNotifications = true
+//                        }
+//                    )]
+//                )
+//            )
             .tabItem { Image(.tabhome).renderingMode(.template); Text("Home"); }
                 .tag(0)
             
-            Text("Discover")
+            DiscoverView()
                 .tabItem { Image(.tabdiscover).renderingMode(.template); Text("Discover"); }
                 .tag(1)
             

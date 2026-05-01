@@ -46,25 +46,26 @@ struct CustomNavigationBar: ViewModifier {
                    leading.title != nil || leading.image != nil {
                     
                     ToolbarItem(placement: .topBarLeading) {
-                        HStack {
-                            if let image = leading.image {
-                                if leading.isSystemImage == true {
-                                    Image(systemName: image)
-                                        .renderingMode((leading.tint != nil) ? .template : .original)
-                                } else {
-                                    Image(image)
-                                        .renderingMode((leading.tint != nil) ? .template : .original)
+                        Button {
+                            leading.action?()
+                        } label: {
+                            HStack {
+                                if let image = leading.image {
+                                    if leading.isSystemImage == true {
+                                        Image(systemName: image)
+                                            .renderingMode((leading.tint != nil) ? .template : .original)
+                                    } else {
+                                        Image(image)
+                                            .renderingMode((leading.tint != nil) ? .template : .original)
+                                    }
+                                }
+                                if let title = leading.title {
+                                    Text(title)
+                                        .font(leading.font)
+                                        .foregroundStyle(leading.tint ?? Color.black)
                                 }
                             }
-                            if let title = leading.title {
-                                Text(title)
-                                    .font(leading.font)
-                                    .foregroundStyle(leading.tint ?? Color.black)
-                            }
-                        }
-                        .foregroundStyle((leading.tint != nil) ? leading.tint! : .black)
-                        .onTapGesture {
-                            leading.action?()
+                            .foregroundStyle((leading.tint != nil) ? leading.tint! : .black)
                         }
                     }
                 }
@@ -75,24 +76,25 @@ struct CustomNavigationBar: ViewModifier {
                             let item = config.trailing[index]
                             
                             if item.title != nil || item.image != nil {
-                                HStack {
-                                    if let image = item.image {
-                                        if item.isSystemImage == true {
-                                            Image(systemName: image)
-                                                .renderingMode((item.tint != nil) ? .template : .original)
-                                        } else {
-                                            Image(image)
-                                                .renderingMode((item.tint != nil) ? .template : .original)
+                                Button {
+                                    item.action?()
+                                } label: {
+                                    HStack {
+                                        if let image = item.image {
+                                            if item.isSystemImage == true {
+                                                Image(systemName: image)
+                                                    .renderingMode((item.tint != nil) ? .template : .original)
+                                            } else {
+                                                Image(image)
+                                                    .renderingMode((item.tint != nil) ? .template : .original)
+                                            }
+                                        }
+                                        if let title = item.title {
+                                            Text(title)
+                                                .font(item.font)
                                         }
                                     }
-                                    if let title = item.title {
-                                        Text(title)
-                                            .font(item.font)
-                                    }
-                                }
-                                .foregroundStyle((item.tint != nil) ? item.tint! : .black)
-                                .onTapGesture {
-                                    item.action?()
+                                    .foregroundStyle((item.tint != nil) ? item.tint! : .black)
                                 }
                             }
                         }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Product: Identifiable {
+struct Product: Identifiable, Equatable {
     let id = UUID()
     let name: String
     let price: Int
@@ -18,6 +18,7 @@ struct Product: Identifiable {
     let description: String
     let sellerName: String
     let sellerImage: String
+    var isFavorite: Bool = false
 }
 
 extension Product {
@@ -33,10 +34,21 @@ extension Product {
         sellerName: "Jessica Milan",
         sellerImage: "p2"
     )
+    static let sample2 = Product(
+        name: "White 6 Tshirt",
+        price: 440,
+        image: "",
+        size: "XXL",
+        condition: "New",
+        location: "Edmonton",
+        description: "Auctor quis sagittis sit ac et praesent nulla malesuada. Purus ornare eget quisque tellus dui a eu. Enim tincidunt sagittis hac tincidunt. Vehicula elit massa nibh a at. Interdum lacinia eu sem malesuada. Vitae consectetur porttitor enim feugiat. Euismod pulvinar amet scelerisque augue nibh. Viverra dui vitae aenean a blandit id. Suspendisse placerat lectus tempus sed mauris magna cursus feugiat egestas. Elit sapien venenatis dictum aliquet nunc cursus auctor. Risus vitae lectus convallis amet facilisi vulputate sed massa. Porttitor arcu fermentum.",
+        sellerName: "Jessica Milan",
+        sellerImage: "p3"
+    )
     
     static let mockData = [
         Product.sample,
-        Product.sample,
+        Product.sample2,
         Product.sample
     ]
 }
