@@ -79,8 +79,11 @@ struct DiscoverView: View {
                         .foregroundStyle(AppColor.blackColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                Image(.filter)
-                    .onTapGesture { }
+                NavigationLink {
+                    FilterView()
+                } label: {
+                    Image(.filter)
+                }
             }
             .padding(.horizontal)
             .padding(.vertical,10)

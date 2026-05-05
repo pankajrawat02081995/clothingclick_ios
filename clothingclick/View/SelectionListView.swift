@@ -83,7 +83,7 @@ struct SelectionListView: View {
                 
                 trailing: [NavBarItem(
                     title: Constants.clearAll,
-                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                    font: AppFont.medium.font(size: 10, relativeTo: .title),
                     image: nil,
                     isSystemImage: false,
                     action: {

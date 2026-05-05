@@ -23,7 +23,19 @@ struct ColorView: View {
                         .listRowInsets(EdgeInsets())
                 }
                 .listStyle(.plain)
-                
+                // Bottom Button
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("\(Constants.view) \(selectedItems.count) \(selectedItems.count <= 1 ? Constants.result : Constants.results)")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .font(AppFont.regular.font(size: 15))
+                        .background(AppColor.blackColor)
+                        .foregroundColor(AppColor.whiteColor)
+                        .cornerRadius(5)
+                        .padding()
+                }
             }
             .onAppear()
             {
@@ -43,9 +55,19 @@ struct ColorView: View {
                             action: {
                                 self.dismiss()
                             }
-                        )
+                        ),
+                        trailing: [NavBarItem(
+                            title: Constants.clearAll,
+                            font: AppFont.medium.font(size: 10, relativeTo: .title),
+                            image: nil,
+                            isSystemImage: false,
+                            action: {
+                                selectedItems.removeAll()
+                            }
+                        )]
                     )
             )
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
     

@@ -36,6 +36,7 @@ final class FilterViewModel: ObservableObject {
         case .distance: route = .distance
         case .sort: route = .sort
         case .mySizes: break // toggle, no navigation
+        case .subCategory: route = .subCategory
         }
     }
     

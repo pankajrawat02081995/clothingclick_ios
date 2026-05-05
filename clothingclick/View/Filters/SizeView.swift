@@ -1,18 +1,16 @@
 //
-//  SizeSelectionView.swift
+//  SizeView.swift
 //  clothingclick
 //
-//  Created by DavidBisht on 20/04/26.
+//  Created by DavidBisht on 01/05/26.
 //
 
 import SwiftUI
 
-struct SizeSelectionView: View {
+struct SizeView: View {
     var category: String
-    @State private var showLocationPermission = false
     @StateObject var vm: SizeSelectionViewModel
     @Environment(\.dismiss) var dismiss
-    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -54,42 +52,7 @@ struct SizeSelectionView: View {
                     vm.fetchCategory()
                 }
             }
-
-            Spacer()
-            
-            if locationManager.isAuthorized {
-                NavigationLink(destination: MainTabView()) {
-                    VStack {
-                        Text(Constants.next)
-                            .font(AppFont.medium.font(size: 15.0))
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(AppColor.blackColor)
-                            .foregroundColor(AppColor.whiteColor)
-                            .cornerRadius(8)
-                    }
-                    .padding(.horizontal)
-                }
-            } else {
-                Button(action: {
-                    showLocationPermission = true
-                }) {
-                    Text(Constants.next)
-                        .font(AppFont.medium.font(size: 15.0))
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(AppColor.blackColor)
-                        .foregroundColor(AppColor.whiteColor)
-                        .cornerRadius(8)
-                }
-                .padding(.horizontal)
-            }
         }
-        .overlay(content: {
-            if showLocationPermission == true {
-                LocationPermissionView(showPopup: $showLocationPermission)
-            }
-        })
         .customNavigationBar(
             config: NavBarConfig(
                 title: Constants.selectSizes,
@@ -101,27 +64,23 @@ struct SizeSelectionView: View {
                     image: "back",
                     isSystemImage: false,
                     action: {
-                        print("Back tapped")
-                        self.dismiss()
+                        dismiss()
                     }
                 ),
                 
                 trailing: [NavBarItem(
-                    title: "Skip",
-                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                    title: Constants.clearAll,
+                    font: AppFont.medium.font(size: 10, relativeTo: .title),
                     image: "",
                     isSystemImage: false,
                     tint: AppColor.borderColor,
                     action: {
-                        print("Skip tapped")
+                        print("Clear all tapped")
                     }
                 ),]
             )
         )
         .padding(0)
-        .onAppear {
-            enableSwipeBack()
-        }
     }
     
     private func selectCategoryToExplore(_ tabs: [String]) -> some View {
@@ -177,3 +136,7 @@ struct SizeSelectionView: View {
         }
     }
 }
+
+//#Preview {
+//    SizeView()
+//}

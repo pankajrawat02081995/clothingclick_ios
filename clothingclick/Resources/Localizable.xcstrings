@@ -80,9 +80,6 @@
     "1234 1234 1234 1234" : {
 
     },
-    "Account" : {
-
-    },
     "AI Selling" : {
 
     },
@@ -107,9 +104,6 @@
     "ClothingClick" : {
 
     },
-    "Discover" : {
-
-    },
     "Edmonton" : {
 
     },
@@ -128,17 +122,11 @@
     "Free" : {
 
     },
-    "Home" : {
-
-    },
     "Looking For?" : {
 
     },
     "Menswear" : {
       "extractionState" : "manual"
-    },
-    "Messages" : {
-
     },
     "Next" : {
       "extractionState" : "manual"
@@ -160,9 +148,6 @@
     },
     "Select Sizes" : {
       "extractionState" : "manual"
-    },
-    "Sell" : {
-
     },
     "Set your preferences to personalize your experience." : {
       "extractionState" : "manual"

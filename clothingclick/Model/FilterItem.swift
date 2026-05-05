@@ -32,6 +32,7 @@ enum FilterKey: String, Hashable {
     case price = "Price"
     case distance = "Distance"
     case sort = "sort"
+    case subCategory = "subCategory"
 }
 
 enum FilterRoute: Hashable {
@@ -46,4 +47,5 @@ enum FilterRoute: Hashable {
     case price
     case distance
     case sort
+    case subCategory
 }

@@ -98,6 +98,15 @@ struct Constants {
     static let brand = "Brand"
     static let colors = "Colors"
     static let searchDesignersAndBrandNames = "Search Designers & Brand Names"
+    static let department = "Department"
+    static let accessories = "Accessories"
+    static let jeans = "Jeans"
+    static let selectLocation = "Select Location"
+    static let sell = "Sell"
+    static let messages = "Messages"
+    static let account = "Account"
+    static let home = "Home"
+    static let discover = "Discover"
 }
 
 struct AppColor {

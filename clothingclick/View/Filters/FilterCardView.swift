@@ -45,6 +45,8 @@ struct FilterCardView: View {
         .navigationDestination(item: $viewModel.route) { route in
                        destinationView(route: route)
                    }
+        .toolbarBackground(.visible, for: .navigationBar)
+
     }
 
     // MARK: - Row Builder
@@ -95,17 +97,13 @@ struct FilterCardView: View {
         switch route {
             
         case .department:
-//            DepartmentView()
-            EmptyView()
+            DepartmentView()
             
         case .category:
-//            CategoryView()
-            EmptyView()
+            CategoryView()
             
         case .size:
-//            SizeView()
-            EmptyView()
-
+            SizeView(category: Constants.menswear, vm: SizeSelectionViewModel(selectedTab: Constants.menswear, categoryType: .menswear))
             
         case .style:
             StyleView()
@@ -131,9 +129,14 @@ struct FilterCardView: View {
 
             
         case .sort:
-//            SortView()
-            EmptyView()
+            SortView()
 
+        case .subCategory:
+            if let category = viewModel.items.first {
+                SubCategoryView(vm: SubCategoryViewModel(category: category))
+            } else {
+                EmptyView()
+            }
         }
     }
     
