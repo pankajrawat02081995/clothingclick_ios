@@ -84,6 +84,7 @@ struct SearchProductsAndProfilesView: View {
                     }
                 )
             ))
+            .toolbar(.hidden, for: .tabBar)
             .onAppear() {
                 vm.mockData()
             }

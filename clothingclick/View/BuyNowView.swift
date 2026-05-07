@@ -7,27 +7,6 @@
 
 import SwiftUI
 
-enum Field {
-    case countryField
-    case firstNameField
-    case lastNameField
-    case addressField
-    case cityField
-    case cardNumberField
-    case stateField
-    case postalCodeField
-    
-    case emailField
-    case nameField
-    case cardField
-    case cvcField
-    case expiryField
-    case phoneField
-    case companyField
-    case apartmentField
-    case provinceField
-}
-
 struct BuyNowView: View {
     
     @StateObject var vm = BuyNowViewModel()

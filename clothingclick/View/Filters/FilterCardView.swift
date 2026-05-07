@@ -7,39 +7,68 @@
 
 import SwiftUI
 
-struct FilterCardView: View {
+struct FilterCardView<BottomContent: View>: View {
     
     @ObservedObject var viewModel: FilterViewModel
-    
-    
+    private let isHideViewsButton: Bool
+    private let ownListView: Bool
+    private let bottomContent: BottomContent
+      
+      init(
+          viewModel: FilterViewModel,
+          isHideViewsButton: Bool = false,
+          ownListView: Bool = false,
+          @ViewBuilder bottomContent: () -> BottomContent = { EmptyView() }
+      ) {
+          self.viewModel = viewModel
+          self.isHideViewsButton = isHideViewsButton
+          self.ownListView = ownListView
+          self.bottomContent = bottomContent()
+      }
+        
     var body: some View {
         VStack(spacing: 0) {
-
-            List {
+            
+            if ownListView == true {
                 ForEach($viewModel.items) { $item in
                     VStack(spacing: 0) {
                         rowView(item: $item)
                             .padding()
                         CustomDivider(color: AppColor.borderColor, lineWidth: 1)
                     }
+                }
+                bottomContent
+            } else {
+                List {
+                    ForEach($viewModel.items) { $item in
+                        VStack(spacing: 0) {
+                            rowView(item: $item)
+                                .padding()
+                            CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                        }
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                         .listRowSeparator(.hidden)
+                    }
+                    bottomContent
+                        .listRowInsets(EdgeInsets(.zero))
+                        .listRowSeparator(.hidden)
                 }
+                .listStyle(.plain)
             }
-            .listStyle(.plain)
             
-
-            // Bottom Button
-            Button(action: {
-                viewModel.apply()
-            }) {
-                Text("\(Constants.view) \(viewModel.resultCount) \(viewModel.resultCount == 1 ? Constants.result : Constants.results)")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.black)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding()
+            if isHideViewsButton == false {
+                // Bottom Button
+                Button(action: {
+                    viewModel.apply()
+                }) {
+                    Text("\(Constants.view) \(viewModel.resultCount) \(viewModel.resultCount == 1 ? Constants.result : Constants.results)")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.black)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding()
+                }
             }
         }
         .navigationDestination(item: $viewModel.route) { route in
@@ -60,13 +89,21 @@ struct FilterCardView: View {
                     .font(AppFont.medium.font(size: 15))
                     .foregroundStyle(AppColor.blackColor)
                 Spacer()
-                Toggle("", isOn: Binding(
+                
+                SlidingSwitch(isOn: Binding(
                     get: { isOn },
                     set: { newValue in
                         item.wrappedValue.type = .toggle(isOn: newValue)
                     }
                 ))
-                .labelsHidden()
+                
+//                Toggle("", isOn: Binding(
+//                    get: { isOn },
+//                    set: { newValue in
+//                        item.wrappedValue.type = .toggle(isOn: newValue)
+//                    }
+//                ))
+//                .labelsHidden()
             }
 
         case .navigation(let value):

@@ -10,38 +10,35 @@ import SwiftUI
 struct NotificationsView: View {
     
     @State private var notifications = NotificationItem.sampleData
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack {
-            header
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    ForEach(notifications) { item in
-                        notificationRow(item)
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(notifications) { item in
+                    notificationRow(item)
+                }
+            }
+            .padding(0)
+        }
+        .customNavigationBar(
+            config: NavBarConfig(
+                title: Constants.notifications,
+                font: .system(size: 16, weight: .medium),
+                leading: NavBarItem(
+                    title: "",
+                    font: .system(size: 14),
+                    image: "back",
+                    isSystemImage: false,
+                    tint: .black,
+                    action: {
+                        dismiss()
                     }
-                }
-                .padding(0)
-            }
-        }
-    }
-    
-    private var header: some View {
-        VStack {
-            HStack {
-                Button(action: {}) {
-                    Image(.back)
-                }
-                
-                Spacer()
-                
-                Text(Constants.notifications)
-                    .font(AppFont.medium.font(size: 13.0))
-                
-                Spacer()
-            }
-            .padding()
-            CustomDivider(color: AppColor.borderColor, lineWidth: 1.0)
-        }
+                )
+            )
+        )
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbar(.hidden, for: .tabBar)
     }
     
     @ViewBuilder
@@ -87,8 +84,9 @@ struct NotificationsView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
-                                .background(Color.black)
-                                .foregroundColor(.white)
+                                .frame(height: 33)
+                                .background(AppColor.blackColor)
+                                .foregroundColor(AppColor.whiteColor)
                                 .cornerRadius(5)
                             
                             Button(Constants.delete) {}
@@ -96,7 +94,9 @@ struct NotificationsView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
-                                .background(Color.clear)
+                                .frame(height: 33)
+                                .background(AppColor.clearColor)
+                                .foregroundColor(AppColor.blackColor)
                                 .cornerRadius(5)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 5.0)

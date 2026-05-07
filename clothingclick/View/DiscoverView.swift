@@ -10,7 +10,10 @@ import SwiftUI
 struct DiscoverView: View {
 
     @StateObject private var vm = DiscoverViewModel()
-
+    @State private var goToNotifications: Bool = false
+    @State private var goToSelectLocation: Bool = false
+    @State var location: String = ""
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -48,6 +51,8 @@ struct DiscoverView: View {
                             SectionView(section: section)
                         }
                     }
+                    newSavedSearch
+                    viewSavedSearches
                 }
             }
         }
@@ -57,6 +62,36 @@ struct DiscoverView: View {
                 vm.loadData()
             }
         }
+        .navigationDestination(isPresented: $goToNotifications) {
+            NotificationsView()
+        }
+        .navigationDestination(isPresented: $goToSelectLocation) {
+            LocationView()
+        }
+        .customNavigationBar(
+            config:NavBarConfig(
+                title: Constants.AppName,
+                font: AppFont.medium.font(size: 13.0),
+                
+                leading: NavBarItem(
+                    title: location,
+                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                    image: "headerlocation",
+                    isSystemImage: false,
+                    action: { }
+                ),
+                
+                trailing: [NavBarItem(
+                    title: "",
+                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                    image: "bell",
+                    isSystemImage: false,
+                    action: {
+                        goToNotifications = true
+                    }
+                )]
+            )
+        )
     }
     
     var defaultSkeleton: some View {
@@ -64,6 +99,36 @@ struct DiscoverView: View {
             SectionSkeletonView(type: .horizontalProducts)
             SectionSkeletonView(type: .categoriesGrid)
             SectionSkeletonView(type: .brands)
+        }
+    }
+    
+    var newSavedSearch: some View {
+        NavigationLink {
+            SavedSearchView()
+        } label: {
+            Text(Constants.createNewSavedSearch)
+                .font(AppFont.medium.font(size: 15))
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(AppColor.blackColor)
+                .foregroundColor(AppColor.whiteColor)
+                .cornerRadius(5)
+                .padding(.horizontal)
+        }
+    }
+    
+    var viewSavedSearches: some View {
+        NavigationLink {
+            SavedSearchesView(vm: SavedSearchesViewModel())
+        } label: {
+            Text(Constants.viewSavedSearches)
+                .font(AppFont.regular.font(size: 13))
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(AppColor.whiteColor)
+                .foregroundColor(AppColor.blackColor)
+                .cornerRadius(5)
+                .padding(.horizontal)
         }
     }
     

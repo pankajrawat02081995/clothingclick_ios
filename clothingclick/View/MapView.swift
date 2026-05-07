@@ -33,7 +33,7 @@ struct MapView: View {
                     tint: .black,
                     action: {
                         // dismiss
-                        self.dismiss()
+                        dismiss()
                     }
                 )
             )

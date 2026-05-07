@@ -11,50 +11,72 @@ struct HomePageView: View {
     let filters = ["Vintage", "Athletic", "Designer", "Street wear"]
         
         let products = Product.mockData
+    @State var isBuyNow: Bool = false
+    @State var selectedProduct: Product?
+    @State var isActiveProductDetailView: Bool = false
+    
+    @State private var goToNotifications: Bool = false
+    @State private var goToSelectLocation: Bool = false
+    @State private var location: String = ""
+    
+    var leadingTitle: String {
+        return location.isEmpty ? Constants.selectLocation : location
+    }
         
         var body: some View {
-//            NavigationStack {
                 VStack(spacing: 0) {
                     CustomDivider(color: AppColor.borderColor)
                     VStack(alignment: .leading, spacing: 16
                     ) {
                         filterView
                         productGrid
-                        
                         Spacer()
                     }
                     .padding()
-//                    .customNavigationBar(
-//                        config:NavBarConfig(
-//                            title: Constants.AppName,
-//                            font: AppFont.medium.font(size: 13.0),
-//                            
-//                            leading: NavBarItem(
-//                                title: "Toronto",
-//                                font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-//                                image: "headerlocation",
-//                                isSystemImage: false,
-//                                action: {
-//                                    print("location tapped")
-//                                }
-//                            ),
-//                            
-//                            trailing: [NavBarItem(
-//                                title: "",
-//                                font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-//                                image: "bell",
-//                                isSystemImage: false,
-//                                action: {
-//                                    print("notification tapped")
-//                                    goToNotifications = true
-//                                }
-//                            )]
-//                        )
-//                    )
+                    .navigationDestination(isPresented: $isActiveProductDetailView) {
+                        if let product = selectedProduct {
+                            ProductDetailView(
+                                product: product,
+                                isActiveBuyNow: isBuyNow
+                            )
+                        }
+                    }
                 }
-          
                 .padding(0.2)
-//            }
+                .navigationDestination(isPresented: $goToNotifications) {
+                    NotificationsView()
+                }
+                .navigationDestination(isPresented: $goToSelectLocation) {
+                    LocationView()
+                }
+                .customNavigationBar(
+                    config:NavBarConfig(
+                        title: Constants.AppName,
+                        font: AppFont.medium.font(size: 13.0),
+                        
+                        leading: NavBarItem(
+                            title: leadingTitle,
+                            font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                            image: "headerlocation",
+                            isSystemImage: false,
+                            action: {
+                                if leadingTitle == Constants.selectLocation {
+                                    goToSelectLocation = true
+                                }
+                            }
+                        ),
+                        
+                        trailing: [NavBarItem(
+                            title: "",
+                            font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+                            image: "bell",
+                            isSystemImage: false,
+                            action: {
+                                goToNotifications = true
+                            }
+                        )]
+                    )
+                )
            
         }
     
@@ -143,8 +165,14 @@ struct HomePageView: View {
                 LazyVGrid(columns: columns, spacing: 16) {
                     
                     ForEach(products) { product in
-                        NavigationLink(destination: ProductDetailView(product: product)) {
+                        NavigationLink(destination: ProductDetailView(product: product, isActiveBuyNow: isBuyNow)) {
                             productCard(product)
+                                .onTapGesture {
+                                    selectedProduct = nil
+                                    selectedProduct = product
+                                    isBuyNow = product.image.isEmpty //add check for buy now with navigation
+                                    isActiveProductDetailView = true
+                                }
                         }
                     }
                 }

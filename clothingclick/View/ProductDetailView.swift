@@ -15,44 +15,65 @@ struct ProductDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State var banners: [Banner] = []
     @State var currentBanner: Int = 0
-    @State private var isActiveBuyNow: Bool = true
+    @State var isActiveBuyNow: Bool = true
     @State private var isActiveBuyNowView: Bool = false
+    @State private var isReadyToMakeADeal: Bool = false
+    @State private var targetFrame: CGRect = .zero
+    @State private var showOverlay = false
+    @State private var position: InfoPosition = .bottom
+    
     
     var body: some View {
-        VStack(spacing: 0) {
-            CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                  
-                    if banners.count > 0 {
-                        productSlides
-//                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width+((UIScreen.main.bounds.size.width*34.6)/100)) // base on figma
-                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width-((UIScreen.main.bounds.size.width*20)/100)) // base on old app
+        ZStack{
+            VStack(spacing: 0) {
+                CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        
+                        if banners.count > 0 {
+                            productSlides
+                            //                            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width+((UIScreen.main.bounds.size.width*34.6)/100)) // base on figma
+                                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width-((UIScreen.main.bounds.size.width*20)/100)) // base on old app
+                        }
+                        productInfo
+                            .padding(.horizontal)
+                        CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                        descriptionView
+                            .padding(.horizontal)
+                        CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                        sellerView
+                            .padding(.horizontal)
+                        CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                        moreFromSeller
+                            .padding(.leading)
+                        CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                        recentlyViewed
+                            .padding(.leading)
+                        
                     }
-                    productInfo
-                        .padding(.horizontal)
-                    CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-                    descriptionView
-                        .padding(.horizontal)
-                    CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-                    sellerView
-                        .padding(.horizontal)
-                    CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-                    moreFromSeller
-                        .padding(.leading)
-                    CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-                    recentlyViewed
-                        .padding(.leading)
-
+                    .padding(0)
+                    .padding(.bottom)
                 }
-                .padding(0)
-                .padding(.bottom)
+                CustomDivider(color: AppColor.borderColor, lineWidth: 1)
+                bottomBar
             }
-            CustomDivider(color: AppColor.borderColor, lineWidth: 1)
-            bottomBar
-        }
-        .onAppear() {
-            banners = Banner.sample
+            .onAppear() {
+                banners = Banner.sample
+            }
+            
+            if showOverlay {
+//                InfoOverlayView(
+//                    title: "Ready to make a deal?",
+//                    subtitle: "This is a fully custom SwiftUI overlay with a directional tail.",
+//                    buttonTitle: "Got it",
+//                    position: position,
+//                    targetFrame: targetFrame
+//                ) {
+//                    withAnimation {
+//                        showOverlay = false
+//                    }
+//                }
+            }
         }
         .navigationDestination(isPresented: $isActiveViewOnMap) {
             LocationView()
@@ -72,7 +93,7 @@ struct ProductDetailView: View {
                     isSystemImage: false,
                     action: {
                         print("back tapped")
-                        self.dismiss()
+                        dismiss()
                     }
                 ),
                 
@@ -315,7 +336,12 @@ struct ProductDetailView: View {
                     
                 }
             } else {
-                Button(action: {}) {
+                Button(action: {
+                    if isReadyToMakeADeal == false {
+                        showOverlay = true
+                    }
+                    isReadyToMakeADeal = true
+                }) {
                     HStack {
                         Image(.chat)
                         Text(Constants.chat)

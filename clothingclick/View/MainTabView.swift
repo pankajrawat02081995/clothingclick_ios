@@ -10,17 +10,6 @@ import SwiftUI
 struct MainTabView: View {
     
     @State private var selectedTab: DashboardTab = .home
-    @State private var goToNotifications = false
-    @State private var goToSelectLocation = false
-    @State private var navigationBarVisibility: Visibility = .visible
-    @State private var location: String = ""
-    
-    var leadingTitle: String {
-        if selectedTab == .discover {
-            return ""
-        }
-        return location.isEmpty ? Constants.selectLocation : location
-    }
     
     init() {
         let appearance = UITabBarAppearance()
@@ -39,21 +28,18 @@ struct MainTabView: View {
     }
     
     var body: some View {
-        NavigationStack {
             TabView(selection: $selectedTab) {
-                HomePageView()
-                    .navigationDestination(isPresented: $goToNotifications) {
-                        NotificationsView()
-                    }
-                    .navigationDestination(isPresented: $goToSelectLocation) {
-                        LocationView()
-                    }
-                    .tabItem { Image(.tabhome).renderingMode(.template); Text(Constants.home); }
-                    .tag(DashboardTab.home)
+                NavigationStack {
+                    HomePageView()
+                }
+                .tabItem { Image(.tabhome).renderingMode(.template); Text(Constants.home); }
+                .tag(DashboardTab.home)
                 
-                DiscoverView()
-                    .tabItem { Image(.tabdiscover).renderingMode(.template); Text(Constants.discover); }
-                    .tag(DashboardTab.discover)
+                NavigationStack {
+                    DiscoverView()
+                }
+                .tabItem { Image(.tabdiscover).renderingMode(.template); Text(Constants.discover); }
+                .tag(DashboardTab.discover)
                 
                 Text(Constants.sell)
                     .tabItem { Image(.tabsell).renderingMode(.template); Text(Constants.sell); }
@@ -72,54 +58,6 @@ struct MainTabView: View {
                 UITabBar.appearance().barTintColor = UIColor(AppColor.blackColor)
             }
             .tint(AppColor.blackColor)
-            .onChange(of: selectedTab) { _, newValue in
-                switch newValue {
-                case .home, .discover:
-                    navigationBarVisibility = .visible
-                case .sell, .messages, .account:
-                    navigationBarVisibility = .hidden
-                }
-            }
-        }
-        .customNavigationBar(
-            config:NavBarConfig(
-                title: Constants.AppName,
-                font: AppFont.medium.font(size: 13.0),
-                
-                leading: NavBarItem(
-                    title: leadingTitle,
-                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-                    image: "headerlocation",
-                    isSystemImage: false,
-                    action: {
-                        switch selectedTab {
-                        case .home:
-                            goToSelectLocation = true
-                        case .discover:
-                            break;
-                        case .sell:
-                            break;
-                        case .messages:
-                            break;
-                        case .account:
-                            break;
-                        }
-                    }
-                ),
-                
-                trailing: [NavBarItem(
-                    title: "",
-                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-                    image: "bell",
-                    isSystemImage: false,
-                    action: {
-                        print("notification tapped")
-                        goToNotifications = true
-                    }
-                )]
-            )
-        )
-        .toolbar(navigationBarVisibility, for: .navigationBar)
     }
     
 }

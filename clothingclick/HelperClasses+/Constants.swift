@@ -107,6 +107,12 @@ struct Constants {
     static let account = "Account"
     static let home = "Home"
     static let discover = "Discover"
+    static let createNewSavedSearch = "Create new saved search"
+    static let viewSavedSearches = "View saved searches"
+    static let savedSearches = "Saved searches"
+    static let cancel = "Cancel"
+    static let notifyMeWhenNewItemsAreListed = "Notify me when new items are listed"
+    static let titleOfSearch = "Title of search"
 }
 
 struct AppColor {
@@ -140,4 +146,28 @@ enum DashboardTab: Hashable {
     case sell
     case messages
     case account
+}
+
+enum Field: Hashable {
+    case countryField
+    case firstNameField
+    case lastNameField
+    case addressField
+    case cityField
+    case cardNumberField
+    case stateField
+    case postalCodeField
+    
+    case emailField
+    case nameField
+    case cardField
+    case cvcField
+    case expiryField
+    case phoneField
+    case companyField
+    case apartmentField
+    case provinceField
+    
+    case savedSearchItemsField
+    case savedSearchTitleField
 }

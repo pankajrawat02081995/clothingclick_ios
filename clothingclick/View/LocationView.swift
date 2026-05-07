@@ -39,13 +39,13 @@ struct LocationView: View {
                     tint: .black,
                     action: {
                         // dismiss
-                        self.dismiss()
+                        dismiss()
                     }
                 )
             )
         )
         .toolbarBackground(.visible, for: .navigationBar)
-
+        .toolbar(.hidden, for: .tabBar)
     }
     
     private var bottomCard: some View {

@@ -57,6 +57,7 @@ struct FilterView: View {
                 ]
             )
         )
+        .toolbar(.hidden, for: .tabBar)
     }
     
 }

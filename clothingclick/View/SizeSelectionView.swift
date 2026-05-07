@@ -13,6 +13,8 @@ struct SizeSelectionView: View {
     @StateObject var vm: SizeSelectionViewModel
     @Environment(\.dismiss) var dismiss
     @StateObject private var locationManager = LocationManager()
+    @EnvironmentObject var appState: AppState
+
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -58,18 +60,19 @@ struct SizeSelectionView: View {
             Spacer()
             
             if locationManager.isAuthorized {
-                NavigationLink(destination: MainTabView()) {
-                    VStack {
-                        Text(Constants.next)
-                            .font(AppFont.medium.font(size: 15.0))
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(AppColor.blackColor)
-                            .foregroundColor(AppColor.whiteColor)
-                            .cornerRadius(8)
-                    }
-                    .padding(.horizontal)
+                VStack {
+                    Text(Constants.next)
+                        .font(AppFont.medium.font(size: 15.0))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(AppColor.blackColor)
+                        .foregroundColor(AppColor.whiteColor)
+                        .cornerRadius(5)
                 }
+                .onTapGesture {
+                    appState.completeOnboarding()
+                }
+                .padding(.horizontal)
             } else {
                 Button(action: {
                     showLocationPermission = true
@@ -80,7 +83,7 @@ struct SizeSelectionView: View {
                         .padding()
                         .background(AppColor.blackColor)
                         .foregroundColor(AppColor.whiteColor)
-                        .cornerRadius(8)
+                        .cornerRadius(5)
                 }
                 .padding(.horizontal)
             }
