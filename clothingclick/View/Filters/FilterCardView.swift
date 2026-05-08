@@ -161,9 +161,7 @@ struct FilterCardView<BottomContent: View>: View {
             PriceView()
             
         case .distance:
-//            DistanceView()
-            EmptyView()
-
+            DistanceView()
             
         case .sort:
             SortView()

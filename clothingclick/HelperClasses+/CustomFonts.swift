@@ -15,6 +15,9 @@ enum AppFont: String {
     case bold = "Roboto-Bold"
     case semibold = "Roboto-SemiBold"
     
+    func uiFont(size: CGFloat) -> UIFont {
+        return UIFont(name: self.rawValue, size: size)!
+    }
     
     func font(size: CGFloat) -> Font {
         return Font.custom(self.rawValue, size: size)

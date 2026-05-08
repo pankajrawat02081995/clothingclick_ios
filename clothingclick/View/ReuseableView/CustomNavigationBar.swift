@@ -18,6 +18,7 @@ struct NavBarItem {
 
 struct NavBarConfig {
     var title: String
+    var titleImage: Image?
     var font: Font
     var tint: Color?
     var leading: NavBarItem? = nil
@@ -37,9 +38,20 @@ struct CustomNavigationBar: ViewModifier {
             .toolbar {
                 
                 ToolbarItem(placement: .principal) {
-                    Text(config.title)
-                        .font(config.font)
-                        .foregroundStyle(config.tint ?? Color.black)
+                    if let image = config.titleImage {
+                        HStack {
+                            image
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Text(config.title)
+                                .font(config.font)
+                                .foregroundStyle(config.tint ?? Color.black)
+                        }
+                    } else {
+                        Text(config.title)
+                            .font(config.font)
+                            .foregroundStyle(config.tint ?? Color.black)
+                    }
                 }
                 
                 if let leading = config.leading,

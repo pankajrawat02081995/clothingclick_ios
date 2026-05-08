@@ -43,6 +43,16 @@
         }
       }
     },
+    "%lld%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%2$@"
+          }
+        }
+      }
+    },
     "$" : {
 
     },
@@ -72,6 +82,9 @@
       }
     },
     "4.9 (9 %@)" : {
+
+    },
+    "12:30 PM" : {
 
     },
     "67" : {
@@ -108,6 +121,9 @@
       "extractionState" : "manual"
     },
     "Brwose" : {
+
+    },
+    "Center" : {
 
     },
     "ClothingClick" : {
@@ -170,7 +186,7 @@
     "Store Hours" : {
 
     },
-    "Tap me" : {
+    "Tap Me" : {
 
     },
     "Top" : {

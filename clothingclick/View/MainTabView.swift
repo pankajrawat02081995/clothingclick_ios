@@ -44,8 +44,9 @@ struct MainTabView: View {
                 Text(Constants.sell)
                     .tabItem { Image(.tabsell).renderingMode(.template); Text(Constants.sell); }
                     .tag(DashboardTab.sell)
-                
-                Text(Constants.messages)
+                NavigationStack {
+                    MessagesView()
+                }
                     .tabItem { Image(.tabmessages).renderingMode(.template); Text(Constants.messages); }
                     .tag(DashboardTab.messages)
                 

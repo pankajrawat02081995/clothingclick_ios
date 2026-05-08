@@ -113,6 +113,12 @@ struct Constants {
     static let cancel = "Cancel"
     static let notifyMeWhenNewItemsAreListed = "Notify me when new items are listed"
     static let titleOfSearch = "Title of search"
+    static let noResultsFound = "No results found"
+    static let spaceDotSpaceSeen = " . Seen"
+    static let typeHere = "Type here"
+    static let selectRadius = "Select Radius"
+    static let km = "km"
+    static let distance = "Distance"
 }
 
 struct AppColor {

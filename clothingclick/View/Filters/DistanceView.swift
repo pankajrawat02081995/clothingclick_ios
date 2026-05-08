@@ -1,14 +1,15 @@
 //
-//  LocationView.swift
+//  DistanceView.swift
 //  clothingclick
 //
-//  Created by DavidBisht on 22/04/26.
+//  Created by DavidBisht on 08/05/26.
 //
+
 
 import SwiftUI
 import MapKit
 
-struct LocationView: View {
+struct DistanceView: View {
     
     @State private var cameraPosition: MapCameraPosition = .automatic
     
@@ -18,10 +19,12 @@ struct LocationView: View {
     )
     
     // Radius in meters
-    let radius: CGFloat = 1000
+    @State private var radius: CGFloat = 1000
+    @State private var kilometers: CGFloat = 1
     
     @Environment(\.dismiss) var dismiss
     @State private var address: String = ""
+    @State private var resultCount: Int = 15
     @FocusState private var isFocused: Bool
     
     var body: some View {
@@ -38,11 +41,14 @@ struct LocationView: View {
                 .stroke(.blue, lineWidth: 2)
             }
             .mapStyle(.standard)
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
             .safeAreaInset(edge: .bottom) {
-                bottomCard
+                selectRadius
                     .background(Color.white)
             }
+            .safeAreaInset(edge: .top, content: {
+                enterAddress
+            })
             .onAppear {
                 updateCamera()
             }
@@ -53,7 +59,7 @@ struct LocationView: View {
         }
         .customNavigationBar(
             config: NavBarConfig(
-                title: Constants.location,
+                title: Constants.distance,
                 font: AppFont.medium.font(size: 13.0),
                 leading: NavBarItem(
                     title: "",
@@ -72,37 +78,62 @@ struct LocationView: View {
         .toolbar(.hidden, for: .tabBar)
     }
     
-    private var bottomCard: some View {
+    private var enterAddress: some View {
+        TextField(Constants.addressOrPostalCode, text: $address)
+            .focused($isFocused)
+            .font(AppFont.regular.font(size: 13.0))
+            .foregroundColor(AppColor.blackColor)
+            .padding()
+            .background(AppColor.whiteColor)
+            .cornerRadius(5)
+            .padding()
+            .shadow(radius: 4)
+    }
+    
+    private var selectRadius: some View {
         VStack(alignment: .leading, spacing: 12) {
-            
-            Text(Constants.locationViewTitle)
-                .font(AppFont.medium.font(size: 17.0))
-                .foregroundColor(AppColor.blackColor)
-            
-            TextField(Constants.addressOrPostalCode, text: $address)
-                .focused($isFocused)
-                .font(AppFont.regular.font(size: 13.0))
-                .foregroundColor(AppColor.blackColor)
-                .padding()
-                .background(Color.gray.opacity(0.15))
-                .cornerRadius(8)
+            HStack {
+                Text(Constants.selectRadius)
+                    .font(AppFont.regular.font(size: 15))
+                    .foregroundColor(AppColor.blackColor)
+                Spacer()
+                Text("\(Int(kilometers))\(Constants.km)")
+                    .font(AppFont.regular.font(size: 15))
+                    .foregroundColor(AppColor.blackColor)
+            }
+            CustomSlider(
+                value: $kilometers,
+                range: 0...100,
+                step: 1,
+                useIntegerStep: true
+            ) {
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(AppColor.grayColor)
+            } fill: {
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(AppColor.blackColor)
+            } thumb: {
+                Circle()
+                    .fill(.black)
+            }
+            .padding(.bottom, 10)
             
             Button(action: {
                 isFocused = false
-                print("Save tapped")
+                print("view tapped")
             }) {
-                Text(Constants.save)
+                Text("\(Constants.view) \(resultCount) \(resultCount == 1 ? Constants.result : Constants.results)")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.black)
                     .font(AppFont.medium.font(size: 15.0))
                     .foregroundColor(AppColor.whiteColor)
-                    .cornerRadius(8)
+                    .cornerRadius(5)
             }
         }
         .padding(20)
         .background(Color.white)
-        .shadow(radius: 10)
+//        .shadow(radius: 10)
     }
     
     func updateCamera() {
@@ -126,5 +157,5 @@ struct LocationView: View {
 }
 
 #Preview {
-    LocationView()
+    DistanceView()
 }
