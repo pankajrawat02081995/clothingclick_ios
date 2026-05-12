@@ -119,6 +119,45 @@ struct Constants {
     static let selectRadius = "Select Radius"
     static let km = "km"
     static let distance = "Distance"
+    static let color = "Color"
+    static let preview = "Preview"
+    static let post = "Post"
+    static let photos = "Photos"
+    static let guide = "Guide"
+    static let brandName = "Brand Name"
+    static let title = "Title"
+    static let price = "Price"
+    static let description = "Description"
+    static let cover = "Cover"
+    static let addPhotos = "Add Photos"
+    static let details = "Details"
+    static let photoGuide = "Photo guide"
+    static let gotIt = "Got it"
+    
+    static let guideCoverPhotoTitle = "Cover Photo: Front view of product"
+    static let guideCoverPhotoDescription = "Capture the front of your item against a clean background. We recommend the PhotoRoom app for editing with a white backdrop."
+    
+    static let guideMorePhotosTitle = "The more photos, the better!"
+    static let guideMorePhotosDescription = "Add up to 9 photos or add a video. Include a full-length view, fine details, and the item being worn. More details means fewer questions from buyers, and quicker sales."
+    
+    static let indicateTheFlawsTitle = "Indicate the flaws"
+    static let indicateTheFlawsDescription = "Show where your item exhibits any imperfections. Honesty is always appreciated, and is hands down the best policy."
+    
+    static let brandTagRecommendedTitle = "Brand tag (recommended)"
+    static let brandTagRecommendedTitleDescription = "Most fashion items have a brand tag. This usually includes the brands logo. If one is present, please provide a clear photo. "
+    
+    static let packaginPhotosTitle = "Packaging photos"
+    static let packaginPhotosDescription = "Displaying any original packaging you have (ie. boxes and dust bags) increase your items selling price and  desirability."
+    
+    static let sneakersFootwearPhotoGuideTitle = "Sneakers / footwear photo guide"
+    static let sneakersFootwearPhotoGuideDescription = "Footwear listings should include photos of the size label inside. This aids in authenticity and offers relevant details to interested buyers."
+    
+    static let outSoleTitle = "Out sole"
+    static let outSoleDescription = "Add a clear photo of the bottom of the shoes. This helps with authentication and provides useful information to the buyer about the condition of the item. "
+    
+
+    static let done = "Done"
+    static let ok = "Ok"
 }
 
 struct AppColor {
@@ -138,6 +177,8 @@ struct AppColor {
     static let grayTextColor: Color = Color("GrayTextColor")
     static let darkGrayTextColor: Color = Color("DarkGrayTextColor")
     static let brownGrayColor: Color = Color("BrownGrayColor")
+    
+    static let defaultPlaceholderTextColor = Color(uiColor: .placeholderText)
 }
 
 enum CategoryType: String {
@@ -176,4 +217,12 @@ enum Field: Hashable {
     
     case savedSearchItemsField
     case savedSearchTitleField
+    
+    //Sell Details
+    
+    case brandNameField
+    case titleField
+    case descriptionField
+    case priceField
+    case locationField
 }

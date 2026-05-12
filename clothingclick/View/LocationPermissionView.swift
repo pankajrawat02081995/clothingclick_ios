@@ -53,12 +53,12 @@ struct LocationPermissionView: View {
                                 .padding()
                                 .background(AppColor.blackColor)
                                 .foregroundColor(AppColor.whiteColor)
-                                .cornerRadius(8)
+                                .cornerRadius(5)
                         }
                         
                     } else if locationManager.authorizationStatus == .authorizedWhenInUse ||
                                 locationManager.authorizationStatus == .authorizedAlways {
-                        RoundedRectangle(cornerRadius: 8)
+                        RoundedRectangle(cornerRadius: 5)
                             .fill(AppColor.blackColor)
                             .frame(height: 44)
                             .overlay {
@@ -83,7 +83,7 @@ struct LocationPermissionView: View {
                                 .padding()
                                 .background(AppColor.blackColor)
                                 .foregroundColor(AppColor.whiteColor)
-                                .cornerRadius(8)
+                                .cornerRadius(5)
                         }
                     }
                 }

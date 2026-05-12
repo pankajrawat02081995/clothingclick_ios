@@ -31,7 +31,9 @@ struct CustomNavigationBar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(config.leading != nil)
+            .background(SwipeBackEnabler())
             .navigationTitle(config.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarRole(.editor)
@@ -120,5 +122,23 @@ struct CustomNavigationBar: ViewModifier {
 extension View {
     func customNavigationBar(config: NavBarConfig) -> some View {
         self.modifier(CustomNavigationBar(config: config))
+    }
+}
+
+struct SwipeBackEnabler: UIViewControllerRepresentable {
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let controller = UIViewController()
+
+        DispatchQueue.main.async {
+            controller.navigationController?
+                .interactivePopGestureRecognizer?
+                .delegate = nil
+        }
+
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
 }

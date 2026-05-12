@@ -391,7 +391,7 @@ struct BuyNowView: View {
             Text(title)
                 .font(AppFont.medium.font(size: 13))
                 .foregroundStyle(AppColor.blackColor)
-            TextField(Constants.enterHere, text: $vm.country)
+            TextField(Constants.enterHere, text: text)
                 .textFieldStyle(.plain)
                 .focused($focusedField, equals: focusStateField)
                 .font(AppFont.regular.font(size: 13))

@@ -11,6 +11,7 @@ import MapKit
 struct LocationView: View {
     
     @State private var cameraPosition: MapCameraPosition = .automatic
+    var onSave: ((String) -> Void)? = nil
     
     let centerCoordinate = CLLocationCoordinate2D(
         latitude: 37.3346,
@@ -85,11 +86,11 @@ struct LocationView: View {
                 .foregroundColor(AppColor.blackColor)
                 .padding()
                 .background(Color.gray.opacity(0.15))
-                .cornerRadius(8)
+                .cornerRadius(5)
             
             Button(action: {
                 isFocused = false
-                print("Save tapped")
+                onSave?(address)
             }) {
                 Text(Constants.save)
                     .frame(maxWidth: .infinity)
@@ -97,7 +98,7 @@ struct LocationView: View {
                     .background(Color.black)
                     .font(AppFont.medium.font(size: 15.0))
                     .foregroundColor(AppColor.whiteColor)
-                    .cornerRadius(8)
+                    .cornerRadius(5)
             }
         }
         .padding(20)

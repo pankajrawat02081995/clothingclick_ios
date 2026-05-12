@@ -73,7 +73,7 @@ struct SizeCategoryView: View {
                                         lineWidth: 1
                                     )
                             )
-                            .cornerRadius(8)
+                            .cornerRadius(5)
                     }
                 }
             }

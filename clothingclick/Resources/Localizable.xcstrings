@@ -123,6 +123,9 @@
     "Brwose" : {
 
     },
+    "Camera" : {
+
+    },
     "Center" : {
 
     },
@@ -145,6 +148,9 @@
       "extractionState" : "manual"
     },
     "Free" : {
+
+    },
+    "Gallery" : {
 
     },
     "Leading" : {
@@ -179,6 +185,9 @@
     },
     "Select Sizes" : {
       "extractionState" : "manual"
+    },
+    "Select Source" : {
+
     },
     "Set your preferences to personalize your experience." : {
       "extractionState" : "manual"

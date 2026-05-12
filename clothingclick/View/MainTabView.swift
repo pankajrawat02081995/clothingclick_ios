@@ -41,7 +41,9 @@ struct MainTabView: View {
                 .tabItem { Image(.tabdiscover).renderingMode(.template); Text(Constants.discover); }
                 .tag(DashboardTab.discover)
                 
-                Text(Constants.sell)
+                NavigationStack {
+                    SellView()
+                }
                     .tabItem { Image(.tabsell).renderingMode(.template); Text(Constants.sell); }
                     .tag(DashboardTab.sell)
                 NavigationStack {

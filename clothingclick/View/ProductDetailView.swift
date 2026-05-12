@@ -158,7 +158,7 @@ struct ProductDetailView: View {
             Text("$\(product.price)")
                 .font(AppFont.semibold.font(size: 25.0))
                 .foregroundStyle(AppColor.blackColor)
-            HStack {
+            HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(Constants.size)
                         .font(AppFont.medium.font(size: 13))

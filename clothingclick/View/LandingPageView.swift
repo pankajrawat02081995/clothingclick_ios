@@ -64,7 +64,7 @@ struct LandingPageView: View {
             .frame(height: 44)
             .background(Color.white.opacity(0.8))
             .foregroundColor(.black)
-            .cornerRadius(8)
+            .cornerRadius(5)
     }
 }
 

@@ -60,7 +60,7 @@ struct DiscoverProductCardView: View {
 //                .scaledToFill()
 //                .frame(width: 140, height: 160)
 //                .clipped()
-//                .cornerRadius(8)
+//                .cornerRadius(5)
 //
 //            Text(item.title)
 //                .font(.subheadline)

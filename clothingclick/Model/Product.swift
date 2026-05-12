@@ -19,6 +19,12 @@ struct Product: Identifiable, Equatable {
     let sellerName: String
     let sellerImage: String
     var isFavorite: Bool = false
+    
+    var department: String = ""
+    var category: String = ""
+    var subcategory: String = ""
+    var colors: [String] = []
+    var style: String = ""
 }
 
 extension Product {

@@ -33,7 +33,8 @@ struct CustomTextEditor: View {
                     .font(Font(uiFont))
                     .foregroundColor(placeholderColor)
                     .padding(.horizontal, cornerRadius+5)
-                    .frame(height: dynamicHeight)
+                    .padding(.vertical, cornerRadius+8)
+                    .frame(height: dynamicHeight, alignment: .topLeading)
             }
             
             // TextEditor
