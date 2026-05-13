@@ -204,27 +204,29 @@ struct SellAddDetailsView: View {
                                     RoundedRectangle(cornerRadius: 5)
                                         .stroke(AppColor.borderColor, lineWidth: 1)
                                 }
-
-                            HStack {
-                                
-                                if index == 0 {
-                                    Text(Constants.cover)
-                                        .font(AppFont.medium.font(size: 10))
-                                        .foregroundColor(AppColor.whiteColor)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 4)
-                                        .background(
-                                            AppColor.blackColor.opacity(0.27)
-                                        )
-                                        .cornerRadius(4)
-                                }
-
+                            VStack {
                                 Spacer()
-
-                                Image(.deletePhoto)
-                                    .padding(6)
+                                HStack {
+                                    
+                                    if index == 0 {
+                                        Text(Constants.cover)
+                                            .font(AppFont.medium.font(size: 10))
+                                            .foregroundColor(AppColor.whiteColor)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
+                                            .background(
+                                                AppColor.blackColor.opacity(0.27)
+                                            )
+                                            .cornerRadius(4)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(.deletePhoto)
+                                        .padding(6)
+                                }
+                                .padding(6)
                             }
-                            .padding(6)
                         }
                         .frame(width: 105, height: 105)
                     }

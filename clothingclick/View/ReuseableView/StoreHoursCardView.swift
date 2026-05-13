@@ -1,5 +1,5 @@
 //
-//  StoreHoursView.swift
+//  StoreHoursCardView.swift
 //  clothingclick
 //
 //  Created by DavidBisht on 27/04/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StoreHoursView: View {
+struct StoreHoursCardView: View {
     
     let hours: [(day: String, time: String)]
     
@@ -46,5 +46,5 @@ struct StoreHoursView: View {
 }
 
 //#Preview {
-//    StoreHoursView()
+//    StoreHoursCardView()
 //}

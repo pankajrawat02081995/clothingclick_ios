@@ -43,6 +43,9 @@
         }
       }
     },
+    "%lld/10" : {
+
+    },
     "%lld%@" : {
       "localizations" : {
         "en" : {
@@ -129,6 +132,9 @@
     "Center" : {
 
     },
+    "Closing" : {
+
+    },
     "ClothingClick" : {
 
     },
@@ -174,6 +180,9 @@
     "Open Apple apple.com" : {
 
     },
+    "Opening" : {
+
+    },
     "Outerwear" : {
       "extractionState" : "manual"
     },
@@ -193,6 +202,9 @@
       "extractionState" : "manual"
     },
     "Store Hours" : {
+
+    },
+    "Store Status" : {
 
     },
     "Tap Me" : {

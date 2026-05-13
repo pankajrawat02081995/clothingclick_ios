@@ -19,6 +19,8 @@ struct HomePageView: View {
     @State private var goToSelectLocation: Bool = false
     @State private var location: String = ""
     
+    @Environment(\.toggleMainSheet) private var toggleSheet
+    
     var leadingTitle: String {
         return location.isEmpty ? Constants.selectLocation : location
     }
@@ -72,7 +74,8 @@ struct HomePageView: View {
                             image: "bell",
                             isSystemImage: false,
                             action: {
-                                goToNotifications = true
+//                                goToNotifications = true
+                                toggleSheet(true)
                             }
                         )]
                     )

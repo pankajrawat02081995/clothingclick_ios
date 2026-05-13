@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     
     @State private var selectedTab: DashboardTab = .home
+    @State private var showSheet = false
     
     init() {
         let appearance = UITabBarAppearance()
@@ -52,7 +53,9 @@ struct MainTabView: View {
                     .tabItem { Image(.tabmessages).renderingMode(.template); Text(Constants.messages); }
                     .tag(DashboardTab.messages)
                 
-                Text(Constants.account)
+                NavigationStack {
+                    AccountView()
+                }
                     .tabItem { Image(.tabaccount).renderingMode(.template); Text(Constants.account); }
                     .tag(DashboardTab.account)
             }
@@ -61,6 +64,18 @@ struct MainTabView: View {
                 UITabBar.appearance().barTintColor = UIColor(AppColor.blackColor)
             }
             .tint(AppColor.blackColor)
+            .fullScreenCover(isPresented: $showSheet) {
+                NavigationStack {
+                    SignUpPopupView()
+                }
+                    .presentationBackground(.clear)
+                    
+            }
+        
+        // This links the environment key to your local @State
+            .environment(\.toggleMainSheet) { value in
+                showSheet = value
+            }
     }
     
 }

@@ -11,6 +11,7 @@ import MapKit
 struct LocationView: View {
     
     @State private var cameraPosition: MapCameraPosition = .automatic
+    @State var viewTitle: String = Constants.location
     var onSave: ((String) -> Void)? = nil
     
     let centerCoordinate = CLLocationCoordinate2D(
@@ -54,7 +55,7 @@ struct LocationView: View {
         }
         .customNavigationBar(
             config: NavBarConfig(
-                title: Constants.location,
+                title: viewTitle,
                 font: AppFont.medium.font(size: 13.0),
                 leading: NavBarItem(
                     title: "",

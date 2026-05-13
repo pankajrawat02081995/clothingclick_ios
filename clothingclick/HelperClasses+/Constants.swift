@@ -155,9 +155,66 @@ struct Constants {
     static let outSoleTitle = "Out sole"
     static let outSoleDescription = "Add a clear photo of the bottom of the shoes. This helps with authentication and provides useful information to the buyer about the condition of the item. "
     
-
+    
     static let done = "Done"
     static let ok = "Ok"
+    static let editProfile = "Edit Profile"
+    static let changePhoto = "Change Photo"
+    static let selectAddress = "Select Address"
+    static let linksSocialAccounts = "Links Social Accounts"
+    static let linkYourInstagramAccount = "Link your Instagram account"
+    static let linkYourFacebookAccount = "Link your Facebook account"
+    static let username = "Username"
+    static let bio = "Bio"
+    static let storeName = "Store name"
+    static let link = "Link"
+    static let operatingHours = "Operating Hours"
+    static let storeHours = "Store Hours"
+    static let contactInformation = "Contact Information"
+    static let phoneNumber = "Phone number"
+    static let rateFromAnother = "Rate From Another"
+    static let leaveAReview = "Leave a review"
+    static let shareYourExperience = "Share Your Experience"
+    static let pleaseShareDetailsOfYourOwnExperienceAtThisStore = "Please share details of your own experience at this store."
+    
+    static let howWasYourExperienceWithThisStore = "How was your experience with this store?"
+    static let ratingsAndReviewsOfBuyersAndSellersAreVisibleToEveryoneOnClothingClick = "Ratings and reviews of buyers and sellers are visible to everyone on Clothing Click."
+    
+    static let addPhoto = "Add Photo"
+    static let addHere = "Add here"
+    static let selectSource = "Select Source"
+    static let camera = "Camera"
+    static let gallery = "Gallery"
+    static let coverPhoto = "Cover photo"
+    static let storeLocation = "Store location"
+    static let localFashionResale = "Local Fashion Resale"
+    static let troubleLoggingIn = "Trouble Logging In?"
+    static let continueWithFacebook = "Continue with Facebook"
+    static let continueWithGoolge = "Continue with Goolge"
+    static let continueWithApple = "Continue with Apple"
+    static let continueWithEmail = "Continue with Email"
+    
+    static let pleaseEnterYourDetails = "Please enter your details"
+    static let password = "Password"
+    static let confirmPassword = "Confirm password"
+    static let _8Characters = "8 Characters"
+    static let _1Uppercase = "1 Uppercase"
+    static let _1Number = "1 Number"
+    static let signUp = "Sign up"
+    static let logIn = "Log in"
+    static let weWillReviewYourApplicationAndContactYouShortly = "We will review your application and contact you shortly."
+    static let convertToStoreProfile = "Convert to store profile"
+    static let storeAddress = "Store address"
+    static let website = "Website"
+    static let submit = "Submit"
+    static let pleaseEnterYourLogInDetails = "Please enter your log in details"
+    static let or = "Or"
+    static let troubleLoggingInSubTitle = "Please enter your phone number, and we’ll send you a link to securely regain access to your account."
+    static let troubleLoggingInDataRatesMayApply = "We will send a text with a verification code. Message and data rates may apply."
+    static let yourPhoneNumber = "Your Phone number"
+    static let enterYourCode = "Enter your Code"
+    static let myCodeIs = "My Code is"
+    static let resendCode = "Resend Code"
 }
 
 struct AppColor {
@@ -225,4 +282,27 @@ enum Field: Hashable {
     case descriptionField
     case priceField
     case locationField
+    
+    // Edit Profile
+    
+    case usernameField
+    case bioField
+    
+    // Edit store Profile
+    
+    case storenameField
+    case linkField
+    
+    // signup
+    case passwordField
+    case confirmPasswordField
+    
+    //Convert to Store Profile
+    
+    case storeNameField
+    case storeAddressField
+    case phoneNumberField
+    case websiteField
+    case messageField
+    
 }

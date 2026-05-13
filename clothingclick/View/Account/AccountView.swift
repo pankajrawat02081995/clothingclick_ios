@@ -1,99 +1,59 @@
 //
-//  StoreProfileView.swift
+//  AccountView.swift
 //  clothingclick
 //
-//  Created by DavidBisht on 27/04/26.
+//  Created by DavidBisht on 12/05/26.
 //
 
 import SwiftUI
 
-struct StoreProfileView: View {
+struct AccountView: View {
     
-    @StateObject var vm = ProfileViewModel()
+    @StateObject var vm = AccountViewModel()
     @Environment(\.dismiss) var dismiss
-    @State private var isActiveFollowersView: Bool = false
-    @State private var showSheetStoreHoursView = false
-    @State private var showSheetContactsSheetView = false
-
+    @State private var isActiveFilterView: Bool = false
+    @State private var isActiveEditProfileView: Bool = false
+    
     var body: some View {
         ZStack {
-            
-        ScrollView {
-            ZStack {
-                VStack {
-                    AsyncImage(url: URL(string: "")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 150)
-                            .clipShape(Rectangle())
-                    } placeholder: {
-                        Image(systemName: "volleyball.fill")
-                            .resizable(resizingMode: .tile)
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 150)
-                            .clipShape(Rectangle())
-                            .foregroundStyle(AppColor.greenColor)
-                            .background(AppColor.lightGreenColor.opacity(0.2))
-                    }
-                    .frame(maxWidth: .infinity)
-                    Spacer()
-                }
+            ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     profileSection
-                        .padding(.top, 80)
                         .padding()
                     Divider()
                         .padding(0)
-                    sellingAndSoldSection
-                        .padding(0)
+                    if vm.products.count == 0 {
+                        PrivateAccountView()
+                            .padding()
+                    } else {
+                        sellingAndSoldSection
+                            .padding(0)
+                    }
                 }
-            }
-                .navigationDestination(isPresented: $isActiveFollowersView) {
-                    FollowersView(profile: User(name: "Aman", username: "aman243", followers: 232, isFollowing: true, image: ""))
+                .onAppear() {
+                    vm.isFacebookLinked = true
+                    vm.isInstagramLinked = true
                 }
-            }
-            .onAppear() {
-                vm.isFacebookLinked = true
-                vm.isInstagramLinked = true
-            }
-            
-            OverFullScreenSheet(isPresented: $showSheetStoreHoursView) {
-                VStack {
-                    StoreHoursCardView(hours: [
-                        ("Monday", "10:00am - 10:00pm"),
-                        ("Tuesday", "10:00am - 10:00pm"),
-                        ("Wednesday", "10:00am - 10:00pm"),
-                        ("Thursday", "10:00am - 10:00pm"),
-                        ("Friday", "10:00am - 10:00pm"),
-                        ("Saturday", "10:00am - 10:00pm"),
-                        ("Sunday", "10:00am - 10:00pm")
-                    ])
-                }
-                .safeAreaPadding(.bottom)
-            }
-            
-            OverFullScreenSheet(isPresented: $showSheetContactsSheetView) {
-                VStack {
-                    ContactsSheetView()
-                }
+                
             }
         }
+        .navigationDestination(isPresented: $isActiveEditProfileView, destination: {
+            EditProfileView()
+        })
         .customNavigationBar(
             config:NavBarConfig(
                 title: "Aman",
                 font: AppFont.medium.font(size: 13.0),
                 
-                leading: NavBarItem(
-                    title: "",
-                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
-                    image: "back",
-                    isSystemImage: false,
-                    action: {
-                        print("back tapped")
-                        self.dismiss()
-                    }
-                ),
+//                leading: NavBarItem(
+//                    title: "",
+//                    font: AppFont.medium.font(size: 13.0, relativeTo: .title),
+//                    image: "back",
+//                    isSystemImage: false,
+//                    action: {
+//                        dismiss()
+//                    }
+//                ),
                 
                 trailing: [NavBarItem(
                     title: "",
@@ -125,7 +85,7 @@ struct StoreProfileView: View {
                 .background(AppColor.borderColor)
                 .clipShape(Circle())
                 
-                HStack {
+                NavigationLink(destination: FollowersView(profile: User(name: "Aman", username: "aman243", followers: 232, isFollowing: true, image: ""))) {
                     VStack(alignment: .leading) {
                         Text("67")
                             .foregroundStyle(AppColor.blackColor)
@@ -135,7 +95,7 @@ struct StoreProfileView: View {
                             .font(AppFont.medium.font(size: 10))
                     }
                     .frame(maxWidth: .infinity)
-                    
+                    .allowsHitTesting(false)
                     VStack(alignment: .leading) {
                         Text("532")
                             .foregroundStyle(AppColor.blackColor)
@@ -145,9 +105,6 @@ struct StoreProfileView: View {
                             .font(AppFont.medium.font(size: 10))
                     }
                     .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        isActiveFollowersView = true
-                    }
                     VStack(alignment: .leading) {
                         Text("232")
                             .foregroundStyle(AppColor.blackColor)
@@ -157,12 +114,7 @@ struct StoreProfileView: View {
                             .font(AppFont.medium.font(size: 10))
                     }
                     .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        isActiveFollowersView = true
-                    }
                 }
-                .padding(.top, 50)
-                
             }
             
             HStack {
@@ -179,24 +131,22 @@ struct StoreProfileView: View {
                 Button(action: {
                 }) {
                     HStack {
-                        Image(.share)
-                            .renderingMode(.template)
+                        Image(.setting)
                     }
                     .frame(width: 34, height: 34)
-                    .background(AppColor.blackColor)
-                    .foregroundStyle(AppColor.whiteColor)
-                    .cornerRadius(5)
-                    
+                    .onTapGesture {
+                       
+                    }
                 }
                 
                 Button(action: {
-                    vm.isFollowing.toggle()
+                    isActiveEditProfileView = true
                 }) {
-                    Text(vm.isFollowing ? Constants.following : Constants.follow)
+                    Text(Constants.editProfile)
                         .frame(width: 90, height: 32)
                         .font(AppFont.medium.font(size: 13))
-                        .background(vm.isFollowing ? AppColor.whiteColor : AppColor.blackColor)
-                        .foregroundColor(vm.isFollowing ? AppColor.blackColor : AppColor.whiteColor)
+                        .background(AppColor.whiteColor)
+                        .foregroundColor(AppColor.blackColor)
                         .cornerRadius(5)
                         .overlay {
                             RoundedRectangle(cornerRadius: 5)
@@ -204,9 +154,6 @@ struct StoreProfileView: View {
                         }
                 }
             }
-            
-            Link("Open Apple apple.com", destination: URL(string: "https://apple.com")!)
-            
             HStack(alignment: .center, spacing: 2) {
                 Image(.star)
                 NavigationLink {
@@ -220,28 +167,38 @@ struct StoreProfileView: View {
             Text("Auctor quis sagittis sit ac et praesent nulla malesuada. Purus ornare eget quisque tellus dui a eu. Enim tincidunt sagittis hac tincidunt. Vehicula elit massa nibh a at. Interdum lacinia eu sem malesuada.")
                 .font(AppFont.regular.font(size: 13))
                 .foregroundStyle(AppColor.blackColor)
-            
-            HStack(spacing: 2) {
-                Image(.clock)
-                Text("Open")
-                    .font(AppFont.regular.font(size: 13))
-                    .foregroundStyle(AppColor.greenColor)
-                Text("until 8:00 PM")
-                    .font(AppFont.regular.font(size: 13))
-                    .foregroundStyle(AppColor.blackColor)
-                Image(.downArrow)
-            }
-            .onTapGesture {
-                showSheetStoreHoursView = true
-            }
-            
-            HStack {
-                IconButtonView(image: Image(.chatfill), title: "Contact", action: {
-                    showSheetContactsSheetView = true
-                })
-                IconButtonView(image: Image(.direction), title: "Direction", action: {
-                    print("Direction")
-                })
+            if vm.isFacebookLinked || vm.isInstagramLinked {
+                HStack {
+                    if vm.isFacebookLinked {
+                        Button(action: { }) {
+                            HStack {
+                                Image(.roundFacebookLogo)
+                                    .cornerRadius(5)
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColor.borderColor,lineWidth: 1)
+                                    }
+                            }
+                               
+                        }
+                    }
+                    if vm.isInstagramLinked {
+                        Button(action: { }) {
+                            HStack {
+                                Image(.instagramLogo)
+                                    .cornerRadius(5)
+                                    .padding(5)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(AppColor.borderColor,lineWidth: 1)
+                                    }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -261,7 +218,7 @@ struct StoreProfileView: View {
                     .font(AppFont.regular.font(size: 17))
                 Spacer()
                 Button {
-                    
+                    isActiveFilterView = true
                 } label: {
                     HStack {
                         Image("filter")
@@ -297,10 +254,12 @@ struct StoreProfileView: View {
             )
             .padding(.horizontal)
         }
+        .navigationDestination(isPresented: $isActiveFilterView) {
+            FilterView()
+        }
     }
 }
 
-
 #Preview {
-    StoreProfileView()
+    AccountView()
 }
